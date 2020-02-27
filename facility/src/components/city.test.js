@@ -1,6 +1,6 @@
 import { City } from "./city.js";
 
-test ( "Let's see if it even works", () => {
+test ( "Basic city functions", () => {
 
     // expect("").toEqual("");
     // City should receive: name, population, longitude, latitude
@@ -65,5 +65,28 @@ test ( "Let's see if it even works", () => {
     myTestCity5.moveOut(howManyMovedOut);
     expect(myTestCity5.getPopulation()).toEqual(0);
 
+})
+    // City – a population > 100,000
+    // Large town – 20,001 to 100,000
+    // Town – 1,001 to 20,000
+    // Village – 101 to 1000
+    // Hamlet – population 0 - 100
+
+test ( "How Big", () => {
+
+    const myTestCity = new City("Mexico", 1, 0, 0);
+    expect(myTestCity.howBig()).toEqual("Hamlet");
+    myTestCity.moveIn(100);
+    // expected population 101
+    expect(myTestCity.howBig()).toEqual("Village");
+    myTestCity.moveIn(899);
+    // expected population 1000
+    expect(myTestCity.howBig()).toEqual("Village");
+    myTestCity.moveIn(1);
+    // expected population 1001
+    expect(myTestCity.howBig()).toEqual("Town");
+    myTestCity.moveIn(18999);
+    // expected population 20000
+    expect(myTestCity.howBig()).toEqual("Town");
 
 })

@@ -72,6 +72,20 @@ class City {
 
     }
 
+    // City – a population > 100,000
+    // Large town – 20,001 to 100,000
+    // Town – 1,001 to 20,000
+    // Village – 101 to 1000
+    // Hamlet – population 0 - 100
+
+    howBig () {
+        let result;
+        if (this.population <= 100) {
+            result = "Hamlet";
+        }
+        return result;
+    }
+
 }
 
 export { City };
