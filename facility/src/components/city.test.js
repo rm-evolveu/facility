@@ -2,7 +2,7 @@ import { City } from "./city.js";
 
 test ( "Basic city functions", () => {
 
-    // expect("").toEqual("");
+    // expect("").toEqual(""); 
     // City should receive: name, population, longitude, latitude
     const myTestCity = new City("Steve", 100, 5, 10);
     expect(myTestCity.getName()).toEqual("Steve");
@@ -76,17 +76,42 @@ test ( "How Big", () => {
 
     const myTestCity = new City("Mexico", 1, 0, 0);
     expect(myTestCity.howBig()).toEqual("Hamlet");
+
     myTestCity.moveIn(100);
     // expected population 101
     expect(myTestCity.howBig()).toEqual("Village");
+
     myTestCity.moveIn(899);
     // expected population 1000
     expect(myTestCity.howBig()).toEqual("Village");
+
     myTestCity.moveIn(1);
     // expected population 1001
     expect(myTestCity.howBig()).toEqual("Town");
+
     myTestCity.moveIn(18999);
     // expected population 20000
     expect(myTestCity.howBig()).toEqual("Town");
+
+    myTestCity.moveIn(1);
+    // expected population 20001
+    expect(myTestCity.howBig()).toEqual("Large town");
+
+    myTestCity.moveIn( 100000-myTestCity.getPopulation() );
+    // expected population 100000
+    expect(myTestCity.howBig()).toEqual("Large town");
+
+    myTestCity.moveIn( 1 );
+    // expected population 100001
+    expect(myTestCity.howBig()).toEqual("City");
+
+    myTestCity.moveIn( 1000 );
+    // expected population 101001
+    expect(myTestCity.howBig()).toEqual("City");
+
+    myTestCity.moveOut( 10000000000000 );
+    // expected population 101001
+    expect(myTestCity.howBig()).toEqual("City");
+    expect(myTestCity.getPopulation()).toEqual(101001);
 
 })

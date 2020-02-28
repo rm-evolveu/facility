@@ -79,10 +79,21 @@ class City {
     // Hamlet – population 0 - 100
 
     howBig () {
+
         let result;
+
         if (this.population <= 100) {
             result = "Hamlet";
+        } else if (this.population <= 1000) {
+            result = "Village";
+        } else if (this.population <= 20000) {
+            result = "Town";
+        } else if (this.population <= 100000) {
+            result = "Large town";
+        } else {
+            result = "City";
         }
+
         return result;
     }
 
