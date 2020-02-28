@@ -1,7 +1,7 @@
 import { City } from "./city.js";
 import { Cities } from "./cities.js";
 
-test ( "Let's see if it even works", () => {
+test ( "Testing Basic City Functions", () => {
 
     // expect("").toEqual("");
 
@@ -59,5 +59,41 @@ test ( "Let's see if it even works", () => {
     testCities.moveOut(tainanCounter,3);
     expect(testCities.getPopulation(tainanCounter)).toEqual(117);
     expect(testCities.howBig(tainanCounter)).toEqual("Village");
+
+})
+
+test ( "Testing Most Northern and Most Southern", () => {
+
+    const testCities = new Cities;
+
+    const mogadisho = new City("Mogadisho", 100, 5, 40);
+    const mogadishoCounter = testCities.addCity(mogadisho);
+
+    const saigon = new City("Saigon", 100, 5, -30);
+    const saigonCounter = testCities.addCity(saigon);
+
+    expect(testCities.getMostNorthern()).toEqual(mogadishoCounter);
+    expect(testCities.getMostSouthern()).toEqual(saigonCounter);
+
+})
+
+test ( "Testing City Roster and total population", () => {
+
+    const testCities = new Cities;
+
+    const mogadisho = new City("Mogadisho", 100, 5, 40);
+    const mogadishoCounter = testCities.addCity(mogadisho);
+
+    const fakeTanjavur = new City("Tanjavur", 100, 5, -30);
+    testCities.addCity(fakeTanjavur);
+
+    const tanjavur = new City("Tanjavur", 100, 5, -30);
+    testCities.addCity(tanjavur);
+
+    testCities.deleteCity(mogadishoCounter);
+    expect(testCities.howManyCities()).toEqual(2);
+    expect(testCities.getCityList()).toEqual([2, 3]);
+
+    expect(testCities.getTotalPopulation()).toEqual(200);
 
 })

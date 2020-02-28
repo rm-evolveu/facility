@@ -2,7 +2,7 @@ import { City } from './city.js';
 
 // here's how i want my cities
 // array of objects containing city and key
-// [ {city: {city}, {key: autoincrement } }]
+// [ {city: {city}, {counter: autoincrement } }]
 
 
 class Cities {
@@ -37,11 +37,61 @@ class Cities {
 
     }
 
-    getMostNorthern () {
+    getCityList () {
+        return this.cities.map ( value => value.counter );
+    }
 
+    getMostNorthern () {
+        const howManyCities = this.howManyCities();
+        let mostNorthernCounter = null;
+
+        if ( howManyCities > 0 ) {
+            // i have at least 1 city and i just take the first one
+            // for most northern for now
+            let mostNorthernLatitude = this.cities[0].city.getLatitude();
+            mostNorthernCounter = this.cities[0].counter;
+
+            // and now i'm starting to look at the other
+            for ( let i = 1; i < howManyCities; i++ ) {
+                const currentCityLatitude = this.cities[i].city.getLatitude()
+                if ( currentCityLatitude > mostNorthernLatitude ) {
+                    mostNorthernLatitude = currentCityLatitude;
+                    mostNorthernCounter = this.cities[i].counter;
+                }
+            } 
+        }
+
+        return mostNorthernCounter;
     }
 
     getMostSouthern () {
+        const howManyCities = this.howManyCities();
+        let mostSouthernCounter = null;
+
+        if ( howManyCities > 0 ) {
+            // i have at least 1 city and i just take the first one
+            // for most northern for now
+            let mostSouthernLatitude = this.cities[0].city.getLatitude();
+            mostSouthernCounter = this.cities[0].counter;
+
+            // and now i'm starting to look at the other
+            for ( let i = 1; i < howManyCities; i++ ) {
+                const currentCityLatitude = this.cities[i].city.getLatitude()
+                if ( currentCityLatitude < mostSouthernLatitude ) {
+                    mostSouthernLatitude = currentCityLatitude;
+                    mostSouthernCounter = this.cities[i].counter;
+                }
+            } 
+        }
+
+        return mostSouthernCounter;
+    }
+
+    getTotalPopulation () {
+
+        return this.cities.reduce (
+            (acc, value) => acc + value.city.getPopulation() , 0
+        )
 
     }
 
