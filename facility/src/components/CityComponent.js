@@ -20,7 +20,7 @@ class CityComponent extends React.Component {
         this.cities = new Cities();
         const mogadisho = new City("Mogadisho", 100, 5, 10);
         this.cities.addCity(mogadisho);
-        const tanjavur = new City("Tanjavur", 500, 5, 10);
+        const tanjavur = new City("Tanjavur", 500, 0, 0);
         this.cities.addCity(tanjavur);
         this.citylist = this.cities.getCityList();
     
@@ -47,7 +47,11 @@ class CityComponent extends React.Component {
         return <div>
                     <div className="controller">
                         <CityController/>
-                        <CityInfoDisplay/>
+                        <CityInfoDisplay
+                            totalPopulation = {this.cities.getTotalPopulation()}
+                            mostNorthern = {this.cities.getName(this.cities.getMostNorthern())}
+                            mostSouthern = {this.cities.getName(this.cities.getMostSouthern())}
+                        />
                     </div>
 
                     <br/>
