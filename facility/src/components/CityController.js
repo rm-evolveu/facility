@@ -53,13 +53,12 @@ class CityController extends React.Component {
                             <button 
                                 onClick={
                                     () => { 
-                                        console.log("Ou-la-la!",
+                                        this.props.addCityHandler(
                                             this.cityNameRef.current.value,
-                                            this.cityPopulationRef.current.value,
-                                            this.cityLongitudeRef.current.value,
-                                            this.cityLatitudeRef.current.value,
+                                            Number(this.cityPopulationRef.current.value),
+                                            Number(this.cityLongitudeRef.current.value),
+                                            Number(this.cityLatitudeRef.current.value)
                                         );
-                                        // this.props.createHandler(this.props.counter, Number(this.myRef.current.value));
                                     }
                                 }>
                                 Let be

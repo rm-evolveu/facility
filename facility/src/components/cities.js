@@ -1,4 +1,4 @@
-// import { City } from './city.js';
+import { City } from './city.js';
 
 // here's how i want my cities
 // array of objects containing city and key
@@ -14,7 +14,8 @@ class Cities {
 
     // aggregate methods
 
-    addCity (newCity) {
+    addCity (cityName, cityPopulation, cityLongitude, cityLatitude) {
+        const newCity = new City(cityName, cityPopulation, cityLongitude, cityLatitude)
         this.counter = this.counter + 1;
         this.cities.push ( {"city": newCity, "counter": this.counter}   )
         return this.counter

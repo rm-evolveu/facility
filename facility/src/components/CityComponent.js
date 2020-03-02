@@ -3,7 +3,6 @@ import { CityCard } from './CityCard.js';
 import { CityInfoDisplay } from './CityInfoDisplay.js';
 import { CityController } from './CityController.js'
 import { Cities } from "./cities.js";
-import { City } from "./city.js";
 import './Cities.css';
 
 
@@ -18,12 +17,12 @@ class CityComponent extends React.Component {
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
         this.cities = new Cities();
-        const mogadisho = new City("Mogadisho", 100, 5, 10);
-        this.cities.addCity(mogadisho);
-        const tanjavur = new City("Tanjavur", 500, 0, 0);
-        this.cities.addCity(tanjavur);
-        this.citylist = this.cities.getCityList();
-    
+        this.cities.addCity("Mogadisho", 100, 5, 10);
+    }
+
+    addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
+        this.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
+        this.setState ({nonsense: null});
     }
 
     moveInHandler = (counter, howMany) => {
@@ -46,11 +45,14 @@ class CityComponent extends React.Component {
 
         return <div>
                     <div className="controller">
-                        <CityController/>
+                        <CityController
+                            addCityHandler = {this.addCityHandler}
+                        />
+                        
                         <CityInfoDisplay
                             totalPopulation = {this.cities.getTotalPopulation()}
-                            mostNorthern = {this.cities.getName(this.cities.getMostNorthern())}
-                            mostSouthern = {this.cities.getName(this.cities.getMostSouthern())}
+                            mostNorthern = {this.cities.getMostNorthern() && this.cities.getName(this.cities.getMostNorthern())}
+                            mostSouthern = {this.cities.getMostSouthern() && this.cities.getName(this.cities.getMostSouthern())}
                         />
                     </div>
 
