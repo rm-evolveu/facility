@@ -3,12 +3,18 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.cityCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* see notes below */
+}
+
 .cityCard {
     display: table;
     border-radius: 10px;
     background-color: deepskyblue;
     padding: 5px;
     margin: 5px;
+    min-width: 350px;
 }
 
 .cityCardRow {
@@ -22,4 +28,8 @@
 .cityCardHeader {
     display: table-footer-group;
     text-align: center;
+}
+
+.infoMessage {
+    color: red;
 }

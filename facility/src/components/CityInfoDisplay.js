@@ -30,6 +30,16 @@ class CityInfoDisplay extends React.Component {
                             {this.props.totalPopulation}
                         </div>
                     </div>
+                    <div className="cityCardRow">
+                        <div className="cityCardCell">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div className="cityCardRow">
+                        <div className="infoMessage">
+                            {this.props.message}
+                        </div>
+                    </div>
                 </div>
 
     }
