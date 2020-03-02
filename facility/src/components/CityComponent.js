@@ -26,6 +26,22 @@ class CityComponent extends React.Component {
     
     }
 
+    moveInHandler = (counter, howMany) => {
+        this.cities.moveIn(counter, howMany);
+        this.setState ({nonsense: null});
+    }
+
+    moveOutHandler = (counter, howMany) => {
+        this.cities.moveOut(counter, howMany);
+        this.setState ({nonsense: null});
+    }
+
+    pandemizeHandler = (counter) => {
+        this.cities.deleteCity(counter);
+        this.setState ({nonsense: null});
+    }
+
+
     render () {
 
         return <div>
@@ -36,13 +52,15 @@ class CityComponent extends React.Component {
 
                     <br/>
 
-                    {this.citylist.map(
+                    {this.cities.getCityList().map(
                         (counter) => <CityCard
                                         cityName={this.cities.getName(counter)} 
                                         cityPopulation={this.cities.getPopulation(counter)}
                                         cityHemisphere={this.cities.whichHemisphere(counter)}
                                         cityHowBig={this.cities.howBig(counter)}
-                                        handler={this.cities}
+                                        moveInHandler={this.moveInHandler}
+                                        moveOutHandler={this.moveOutHandler}
+                                        pandemizeHandler={this.pandemizeHandler}
                                         counter={counter}
                                         key={counter}
                                      />

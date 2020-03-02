@@ -20,6 +20,6 @@
 }
 
 .cityCardHeader {
-    display: table-header-group;
+    display: table-footer-group;
     text-align: center;
 }
