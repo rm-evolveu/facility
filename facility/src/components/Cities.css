@@ -2,3 +2,24 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.cityCard {
+    display: table;
+    border-radius: 10px;
+    background-color: deepskyblue;
+    padding: 5px;
+    margin: 5px;
+}
+
+.cityCardRow {
+    display: table-row;
+}
+
+.cityCardCell {
+    display: table-cell;
+}
+
+.cityCardHeader {
+    display: table-header-group;
+    text-align: center;
+}

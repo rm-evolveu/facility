@@ -17,7 +17,7 @@ class CityComponent extends React.Component {
 
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
-        this.cities = new Cities;
+        this.cities = new Cities();
         const mogadisho = new City("Mogadisho", 100, 5, 10);
         this.cities.addCity(mogadisho);
         const tanjavur = new City("Tanjavur", 500, 5, 10);
@@ -28,13 +28,6 @@ class CityComponent extends React.Component {
 
     render () {
 
-        const letsHaveSomeFun = [
-            {cityName: "Winnipeg", cityPopulation: 1 },
-            {cityName: "Taxco", cityPopulation: 7},
-            {cityName: "Delhi", cityPopulation: 37},
-            {cityName: "Cairo", cityPopulation: 5}
-        ]
-
         return <div>
                     <div className="controller">
                         <CityController/>
@@ -43,17 +36,16 @@ class CityComponent extends React.Component {
 
                     <br/>
 
-
-                    {letsHaveSomeFun.map(
-                        (value) => <CityCard cityName={value.cityName} cityPopulation={value.cityPopulation}/>
-                    )}
-
-                    <br/>THIS IS A SEPARATOR<br/><br/>
-
                     {this.citylist.map(
-                        (value) => <CityCard
-                                        cityName={this.cities.getCity(value).getName()} 
-                                        cityPopulation={this.cities.getCity(value).getPopulation()}/>
+                        (counter) => <CityCard
+                                        cityName={this.cities.getName(counter)} 
+                                        cityPopulation={this.cities.getPopulation(counter)}
+                                        cityHemisphere={this.cities.whichHemisphere(counter)}
+                                        cityHowBig={this.cities.howBig(counter)}
+                                        handler={this.cities}
+                                        counter={counter}
+                                        key={counter}
+                                     />
                     )}
 
 
