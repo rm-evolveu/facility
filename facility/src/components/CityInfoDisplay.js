@@ -2,8 +2,27 @@ import React from 'react';
 
 class CityInfoDisplay extends React.Component {
 
+    constructor (props) {
+        super (props);
+        this.state = {
+            blink: true
+        }
+
+    }
+
+    componentDidMount () {
+
+        setTimeout( 
+            () => { 
+                this.setState( {blink: false } )
+            } ,
+            2000)
+
+    }
 
     render () {
+
+        const messageClass = this.state.blink ? "widestColumn infoMessageEntryAnimation" : "widestColumn infoMessage" 
 
         return <div className="cityCard">
                     <div className="wideColumn1">
@@ -27,7 +46,7 @@ class CityInfoDisplay extends React.Component {
                     <div className="widestColumn">
                         
                     </div>                    
-                    <div className="widestColumn infoMessage">
+                    <div className={messageClass}>
                         {this.props.message}
                     </div>
                 </div>

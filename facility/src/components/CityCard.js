@@ -9,8 +9,6 @@ class CityCard extends React.Component {
         this.myRef = React.createRef();
     }
 
-
-
     render () {
 
         return <div className="cityCard">
