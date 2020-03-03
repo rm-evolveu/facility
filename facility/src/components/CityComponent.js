@@ -24,22 +24,59 @@ class CityComponent extends React.Component {
     }
 
     addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
-        this.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
-        this.message = cityName + " has been created."
+        if (cityName.length > 0) {
+            if (cityPopulation > 0 && Math.round(cityPopulation) === cityPopulation) {
+                if (cityLongitude <= 180 && cityLongitude >= -180 && cityLatitude <= 90 && cityLatitude >= -90) {
+                    this.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
+                    this.message = cityName + " has been created."        
+                } else {
+                    this.message = "We need valid coordinates."
+                }
+            } else {
+                this.message = "We want a non-negative, non-fractional population."
+            }
+        } else {
+            this.message = "We want our cities to have names."
+        }
+
         this.setState ({nonsense: null});
     }
 
     moveInHandler = (counter, howMany) => {
         const cityName = this.cities.getName(counter);
-        this.cities.moveIn(counter, howMany);
-        this.message = howMany + " citizens emerged in " + cityName + "."
+        if (howMany > 0) {
+            if (Math.round(howMany) === howMany) {
+                this.cities.moveIn(counter, howMany);
+                this.message = howMany + " citizens emerged in " + cityName + "."        
+            } else {
+                // Thank you Dale!
+                this.message = "We don't deal with fractions of citizens."
+            }
+        } else {
+            this.message = "We can only emerge a positive number of citizens."
+        }
         this.setState ({nonsense: null});
     }
 
     moveOutHandler = (counter, howMany) => {
         const cityName = this.cities.getName(counter);
-        this.cities.moveOut(counter, howMany);
-        this.message = howMany + " citizens vanished from " + cityName + "."
+        if (howMany > 0) {
+            if (Math.round(howMany) === howMany) {
+                if (howMany <= this.cities.getPopulation(counter)) {
+                    this.cities.moveOut(counter, howMany);
+                    this.message = howMany + " citizens vanished from " + cityName + "."    
+                } else {
+                    this.message = "We don't fancy ghost cities."
+                }
+            } else {
+                // Thank you Dale!
+                this.message = "We don't deal with fractions of citizens."
+            }
+        } else {
+            this.message = "We can only vanish a positive number of citizens."
+        }
+
+
         this.setState ({nonsense: null});
     }
 

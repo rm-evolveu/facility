@@ -6,39 +6,29 @@ class CityInfoDisplay extends React.Component {
     render () {
 
         return <div className="cityCard">
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn1">
                             Most Northern City:
-                        </div>
-                        <div className="cityCardCell">
-                            {this.props.mostNorthern}
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn2">
+                        {this.props.mostNorthern}
+                    </div>
+                    <div className="wideColumn1">
                             Most Southern City:
-                        </div>
-                        <div className="cityCardCell">
-                            {this.props.mostSouthern}
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn2">
+                        {this.props.mostSouthern}
+                    </div>
+                    <div className="wideColumn1">
                             Total Population:
-                        </div>
-                        <div className="cityCardCell">
-                            {this.props.totalPopulation}
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
-                            &nbsp;
-                        </div>
+                    <div className="wideColumn2">
+                        {this.props.totalPopulation}
                     </div>
-                    <div className="cityCardRow">
-                        <div className="infoMessage">
-                            {this.props.message}
-                        </div>
+                    <div className="widestColumn">
+                        
+                    </div>                    
+                    <div className="widestColumn infoMessage">
+                        {this.props.message}
                     </div>
                 </div>
 

@@ -16,54 +16,45 @@ class CityController extends React.Component {
     render () {
 
         return <div className="cityCard">
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn1">
                             Name:
-                        </div>
-                        <div className="cityCardCell">
-                            <input type="text" ref={this.cityNameRef}/>
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn2">
+                        <input type="text" ref={this.cityNameRef}/>
+                    </div>
+                    <div className="wideColumn1">
                             Population:
-                        </div>
-                        <div className="cityCardCell">
-                            <input type="number" ref={this.cityPopulationRef}/>
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn2">
+                        <input type="text" ref={this.cityPopulationRef}/>
+                    </div>
+                    <div className="wideColumn1">
                             Longitude:
-                        </div>
-                        <div className="cityCardCell">
-                            <input type="number" ref={this.cityLongitudeRef}/>
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
+                    <div className="wideColumn2">
+                        <input type="text" ref={this.cityLongitudeRef}/>
+                    </div>
+                    <div className="wideColumn1">
                             Latitude:
-                        </div>
-                        <div className="cityCardCell">
-                            <input type="number" ref={this.cityLatitudeRef}/>
-                        </div>
                     </div>
-                    <div className="cityCardRow">
-                        <div className="cityCardCell">
-                            <button 
-                                onClick={
-                                    () => { 
-                                        this.props.addCityHandler(
-                                            this.cityNameRef.current.value,
-                                            Number(this.cityPopulationRef.current.value),
-                                            Number(this.cityLongitudeRef.current.value),
-                                            Number(this.cityLatitudeRef.current.value)
-                                        );
-                                    }
-                                }>
-                                Let be
-                            </button>
-                        </div>
+                    <div className="wideColumn2">
+                        <input type="text" ref={this.cityLatitudeRef}/>
+                    </div>
+
+                    <div className="widestColumn">
+                        <button 
+                            onClick={
+                                () => { 
+                                    this.props.addCityHandler(
+                                        this.cityNameRef.current.value,
+                                        Number(this.cityPopulationRef.current.value),
+                                        Number(this.cityLongitudeRef.current.value),
+                                        Number(this.cityLatitudeRef.current.value)
+                                    );
+                                }
+                            }>
+                            Genesize
+                        </button>
                     </div>
                 </div>
 
