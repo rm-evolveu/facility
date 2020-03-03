@@ -16,75 +16,84 @@ class CityComponent extends React.Component {
 
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
-        this.cities = new Cities();
-        this.cities.addCity("Mogadisho", 100, 5, 10);
-        this.cities.addCity("Winnipeg", 200, 4, 0);
-        this.cities.addCity("Tanjavur", 300, 10, -20);
-        this.message = "Do something and you'll get to know here"
+        this.state = {
+            message: "Do something and you'll get to know here.",
+            cities: new Cities()
+        }
+        this.state.cities.addCity("Mogadisho", 100, 5, 10);
+        this.state.cities.addCity("Winnipeg", 200, 4, 0);
+        this.state.cities.addCity("Tanjavur", 300, 10, -20);
     }
 
     addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
+
+        let myMessage;
+
         if (cityName.length > 0) {
             if (cityPopulation > 0 && Math.round(cityPopulation) === cityPopulation) {
                 if (cityLongitude <= 180 && cityLongitude >= -180 && cityLatitude <= 90 && cityLatitude >= -90) {
-                    this.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
-                    this.message = cityName + " has been created."        
+                    this.state.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
+                    myMessage = cityName + " has been created."        
                 } else {
-                    this.message = "We need valid coordinates."
+                    myMessage = "We need valid coordinates."
                 }
             } else {
-                this.message = "We want a non-negative, non-fractional population."
+                myMessage = "We want a non-negative, non-fractional population."
             }
         } else {
-            this.message = "We want our cities to have names."
+            myMessage = "We want our cities to have names."
         }
 
-        this.setState ({nonsense: null});
+        this.setState ({message: myMessage});
     }
 
     moveInHandler = (counter, howMany) => {
-        const cityName = this.cities.getName(counter);
+        let myMessage;
+
+        const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
-                this.cities.moveIn(counter, howMany);
-                this.message = howMany + " citizens emerged in " + cityName + "."        
+                this.state.cities.moveIn(counter, howMany);
+                myMessage = howMany + " citizens emerged in " + cityName + "."        
             } else {
                 // Thank you Dale!
-                this.message = "We don't deal with fractions of citizens."
+                myMessage = "We don't deal with fractions of citizens."
             }
         } else {
-            this.message = "We can only emerge a positive number of citizens."
+            myMessage = "We can only emerge a positive number of citizens."
         }
-        this.setState ({nonsense: null});
+        this.setState ({message: myMessage});
     }
 
     moveOutHandler = (counter, howMany) => {
-        const cityName = this.cities.getName(counter);
+        let myMessage;
+
+        const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
-                if (howMany <= this.cities.getPopulation(counter)) {
-                    this.cities.moveOut(counter, howMany);
-                    this.message = howMany + " citizens vanished from " + cityName + "."    
+                if (howMany <= this.state.cities.getPopulation(counter)) {
+                    this.state.cities.moveOut(counter, howMany);
+                    myMessage = howMany + " citizens vanished from " + cityName + "."    
                 } else {
-                    this.message = "We don't fancy ghost cities."
+                    myMessage = "We don't fancy ghost cities."
                 }
             } else {
                 // Thank you Dale!
-                this.message = "We don't deal with fractions of citizens."
+                myMessage = "We don't deal with fractions of citizens."
             }
         } else {
-            this.message = "We can only vanish a positive number of citizens."
+            myMessage = "We can only vanish a positive number of citizens."
         }
 
 
-        this.setState ({nonsense: null});
+        this.setState ({message: myMessage});
     }
 
     pandemizeHandler = (counter) => {
-        const cityName = this.cities.getName(counter);
-        this.cities.deleteCity(counter);
-        this.message = cityName + " has been pandemized."
-        this.setState ({nonsense: null});
+        const cityName = this.state.cities.getName(counter);
+        this.state.cities.deleteCity(counter);
+        const myMessage = cityName + " has been pandemized.";
+        this.setState ({message: myMessage});
     }
 
 
@@ -97,21 +106,21 @@ class CityComponent extends React.Component {
                         />
                         
                         <CityInfoDisplay
-                            totalPopulation = {this.cities.getTotalPopulation()}
-                            mostNorthern = {this.cities.getMostNorthern() && this.cities.getName(this.cities.getMostNorthern())}
-                            mostSouthern = {this.cities.getMostSouthern() && this.cities.getName(this.cities.getMostSouthern())}
-                            message = {this.message}
+                            totalPopulation = {this.state.cities.getTotalPopulation()}
+                            mostNorthern = {this.state.cities.getMostNorthern() && this.state.cities.getName(this.state.cities.getMostNorthern())}
+                            mostSouthern = {this.state.cities.getMostSouthern() && this.state.cities.getName(this.state.cities.getMostSouthern())}
+                            message = {this.state.message}
                         />
 
                     </div>
 
                     <div className="cityCards">
-                        {this.cities.getCityList().map(
+                        {this.state.cities.getCityList().map(
                             (counter) => <CityCard
-                                            cityName={this.cities.getName(counter)} 
-                                            cityPopulation={this.cities.getPopulation(counter)}
-                                            cityHemisphere={this.cities.whichHemisphere(counter)}
-                                            cityHowBig={this.cities.howBig(counter)}
+                                            cityName={this.state.cities.getName(counter)} 
+                                            cityPopulation={this.state.cities.getPopulation(counter)}
+                                            cityHemisphere={this.state.cities.whichHemisphere(counter)}
+                                            cityHowBig={this.state.cities.howBig(counter)}
                                             moveInHandler={this.moveInHandler}
                                             moveOutHandler={this.moveOutHandler}
                                             pandemizeHandler={this.pandemizeHandler}
@@ -120,9 +129,6 @@ class CityComponent extends React.Component {
                                         />
                         )}
                     </div>
-
-
-
                 </div>
 
     }
