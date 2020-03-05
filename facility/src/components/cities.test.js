@@ -9,7 +9,7 @@ test ( "Testing Basic City Functions", () => {
     // const mogadisho = new City("Mogadisho", 100, 5, 10);
     // const mogadishoCounter = testCities.addCity(mogadisho);
 
-    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 10)
+    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 10, 1)
 
     expect(testCities.howManyCities()).toEqual(1);
     expect(mogadishoCounter).toEqual(1);
@@ -17,7 +17,7 @@ test ( "Testing Basic City Functions", () => {
     // const ouagadougou = new City("Ouagadougou", 100, 5, 10);
     // const ouagadougouCounter = testCities.addCity(ouagadougou);
 
-    const ouagadougouCounter = testCities.addCity("Ouagadougou", 100, 5, 10)
+    const ouagadougouCounter = testCities.addCity("Ouagadougou", 100, 5, 10, 2)
 
 
     expect(testCities.howManyCities()).toEqual(2);
@@ -37,7 +37,7 @@ test ( "Testing Basic City Functions", () => {
 
     // const ouagadougouCounter2 = testCities.addCity(ouagadougou);
 
-    const ouagadougouCounter2 = testCities.addCity("Ouagadougou", 100, 5, 10)
+    const ouagadougouCounter2 = testCities.addCity("Ouagadougou", 100, 5, 10, 3)
 
     expect(testCities.howManyCities()).toEqual(1);
     expect(ouagadougouCounter2).toEqual(3);
@@ -47,8 +47,8 @@ test ( "Testing Basic City Functions", () => {
     // const taipeiCounter = testCities.addCity(taipei)
     // const tainanCounter = testCities.addCity(tainan)
 
-    const taipeiCounter = testCities.addCity("Taipei", 50, 40, 30)
-    const tainanCounter = testCities.addCity("Tainan", 20, 10, 0)
+    const taipeiCounter = testCities.addCity("Taipei", 50, 40, 30, 4)
+    const tainanCounter = testCities.addCity("Tainan", 20, 10, 0, 5)
 
 
     expect(testCities.getName(taipeiCounter)).toEqual("Taipei");
@@ -82,12 +82,12 @@ test ( "Testing Most Northern and Most Southern", () => {
     // const mogadisho = new City("Mogadisho", 100, 5, 40);
     // const mogadishoCounter = testCities.addCity(mogadisho);
 
-    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 40);
+    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 40, 6);
 
     // const saigon = new City("Saigon", 100, 5, -30);
     // const saigonCounter = testCities.addCity(saigon);
 
-    const saigonCounter = testCities.addCity("Saigon", 100, 5, -30);
+    const saigonCounter = testCities.addCity("Saigon", 100, 5, -30, 7);
 
 
     expect(testCities.getMostNorthern()).toEqual(mogadishoCounter);
@@ -102,17 +102,17 @@ test ( "Testing City Roster and total population", () => {
     // const mogadisho = new City("Mogadisho", 100, 5, 40);
     // const mogadishoCounter = testCities.addCity(mogadisho);
 
-    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 40);
+    const mogadishoCounter = testCities.addCity("Mogadisho", 100, 5, 40, 1);
 
-    // const fakeTanjavur = new City("Tanjavur", 100, 5, -30);
-    // testCities.addCity(fakeTanjavur);
+    // const fakeThanjavur = new City("Thanjavur", 100, 5, -30);
+    // testCities.addCity(fakeThanjavur);
 
-    testCities.addCity("Tanjavur", 100, 5, -30)
+    testCities.addCity("Thanjavur", 100, 5, -30, 2)
 
-    // const tanjavur = new City("Tanjavur", 100, 5, -30);
-    // testCities.addCity(tanjavur);
+    // const Thanjavur = new City("Thanjavur", 100, 5, -30);
+    // testCities.addCity(Thanjavur);
 
-    testCities.addCity("Tanjavur", 100, 5, -30)
+    testCities.addCity("Thanjavur", 100, 5, -30, 3)
 
 
     testCities.deleteCity(mogadishoCounter);
@@ -121,4 +121,18 @@ test ( "Testing City Roster and total population", () => {
 
     expect(testCities.getTotalPopulation()).toEqual(200);
 
+})
+
+test ( "Vague attempt to test counter after refactoring", () => {
+    const testCities = new Cities
+    testCities.addCity("Thanjavur", 100, 5, -30, 1)
+    expect(testCities.getName(1)).toEqual("Thanjavur")
+})
+
+test ( "Testing flush", () => {
+    const testCities = new Cities
+    testCities.addCity("Thanjavur", 100, 5, -30, 1)
+    testCities.addCity("Winnipeg", 100, 5, -30, 2)
+    testCities.flush()
+    expect(testCities.getCityList()).toEqual([]);
 })

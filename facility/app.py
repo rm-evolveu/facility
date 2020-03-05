@@ -5,10 +5,10 @@ app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
 CORS(app)
 
 cities = [ 
-      {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 0},
-      {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 1},
-      {'Name': 'Winnipeg', 'Population': 50, 'Longitude': -2, 'Latitude': 80, 'Counter': 2},
-      {'Name': 'Thanjavur', 'Population': 5, 'Longitude': 30, 'Latitude': -89, 'Counter': 3}      
+      {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 1},
+      {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 2},
+      {'Name': 'Winnipeg', 'Population': 50, 'Longitude': -2, 'Latitude': 80, 'Counter': 3},
+      {'Name': 'Thanjavur', 'Population': 5, 'Longitude': 30, 'Latitude': -89, 'Counter': 4}      
 ]
 
 counter = 0

@@ -8,17 +8,19 @@ import { City } from './city.js';
 class Cities {
 
     constructor () {
-        this.counter = 0;
+        this.cities = [];
+    }
+
+    flush () {
         this.cities = [];
     }
 
     // aggregate methods
 
-    addCity (cityName, cityPopulation, cityLongitude, cityLatitude) {
+    addCity (cityName, cityPopulation, cityLongitude, cityLatitude, counter) {
         const newCity = new City(cityName, cityPopulation, cityLongitude, cityLatitude)
-        this.counter = this.counter + 1;
-        this.cities.push ( {"city": newCity, "counter": this.counter}   )
-        return this.counter
+        this.cities.push ( {"city": newCity, "counter": counter}   )
+        return counter
     }
 
     deleteCity (counter) {
@@ -33,6 +35,7 @@ class Cities {
     getCity (counter) {
 
         const myTestingFunction = (element) => element.counter === counter;
+        // console.log("counter", counter, typeof(counter))
 
         return this.cities.find(myTestingFunction).city;
 

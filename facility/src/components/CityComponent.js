@@ -23,20 +23,29 @@ class CityComponent extends React.Component {
     }
 
     componentDidMount () {
-        this.loadCities()
+        this.fetchAll()
     }
 
-    loadCities = async () => {
-        const responseData = await this.fetchHandler('http://localhost:5000/api/all');
+    fetchAll = async () => {
+        const url = 'http://localhost:5000/api/all'
+        const responseData = await this.fetchHandler(url);
+        this.state.cities.flush()
         for (let city of responseData['Cities']){
             this.state.cities.addCity(
                 city['Name'],
                 city['Population'],
                 city['Longitude'],
-                city['Latitude']
+                city['Latitude'],
+                city['Counter']
             );    
         }
         this.setState ({message: "O-la-la"});
+    }
+
+    fetchDelete = async (counter) => {
+        const url = 'http://localhost:5000/api/delete/' + counter
+        const responseData = await this.fetchHandler(url);
+        console.log(responseData);
     }
 
     fetchHandler = async (url) => {
@@ -109,10 +118,11 @@ class CityComponent extends React.Component {
         this.setState ({message: myMessage});
     }
 
-    pandemizeHandler = (counter) => {
+    pandemizeHandler = async (counter) => {
         const cityName = this.state.cities.getName(counter);
-        this.state.cities.deleteCity(counter);
         const myMessage = cityName + " has been pandemized.";
+        await this.fetchDelete(counter)
+        await this.fetchAll()
         this.setState ({message: myMessage});
     }
 
