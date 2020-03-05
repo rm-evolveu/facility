@@ -25,6 +25,14 @@ class CityComponent extends React.Component {
         this.state.cities.addCity("Tanjavur", 300, 10, -20);
     }
 
+    fetchHandler = async () => {
+        console.log('Yes you pressed the button')
+        const response = await fetch('http://localhost:5000/hello')
+        const responseText = await response.text()
+        console.log('response from fetch', responseText)
+        this.setState ({message: responseText});
+    }
+
     addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
 
         let myMessage;
@@ -110,6 +118,7 @@ class CityComponent extends React.Component {
                             mostNorthern = {this.state.cities.getMostNorthern() && this.state.cities.getName(this.state.cities.getMostNorthern())}
                             mostSouthern = {this.state.cities.getMostSouthern() && this.state.cities.getName(this.state.cities.getMostSouthern())}
                             message = {this.state.message}
+                            fetchHandler = {this.fetchHandler}
                         />
 
                     </div>

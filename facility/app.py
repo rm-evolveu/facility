@@ -1,5 +1,8 @@
 from flask import Flask, render_template
+from flask_cors import CORS
+
 app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
+CORS(app)
 
 cities = [ 
       {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 0} 
@@ -8,6 +11,14 @@ cities = [
 counter = 0
 
 # this is just for warmup
+@app.route('/hello')
+def hello():
+   return 'Hello from backend'
+
+@app.route('/test')
+def test():
+   return render_template('test.html', cities = cities, name = "Barbara", number = 10)
+
 @app.route('/react')
 def react():
    return render_template('index.html')

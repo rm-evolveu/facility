@@ -44,7 +44,7 @@ class CityInfoDisplay extends React.Component {
                         {this.props.totalPopulation}
                     </div>
                     <div className="widestColumn">
-                        
+                        <button onClick={this.props.fetchHandler}>Fetch</button> 
                     </div>                    
                     <div className={messageClass}>
                         {this.props.message}
