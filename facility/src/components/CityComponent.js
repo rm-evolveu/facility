@@ -20,17 +20,29 @@ class CityComponent extends React.Component {
             message: "Do something and you'll get to know here.",
             cities: new Cities()
         }
-        this.state.cities.addCity("Mogadisho", 100, 5, 10);
-        this.state.cities.addCity("Winnipeg", 200, 4, 0);
-        this.state.cities.addCity("Tanjavur", 300, 10, -20);
     }
 
-    fetchHandler = async () => {
-        console.log('Yes you pressed the button')
-        const response = await fetch('http://localhost:5000/hello')
-        const responseText = await response.text()
-        console.log('response from fetch', responseText)
-        this.setState ({message: responseText});
+    componentDidMount () {
+        this.loadCities()
+    }
+
+    loadCities = async () => {
+        const responseData = await this.fetchHandler('http://localhost:5000/api/all');
+        for (let city of responseData['Cities']){
+            this.state.cities.addCity(
+                city['Name'],
+                city['Population'],
+                city['Longitude'],
+                city['Latitude']
+            );    
+        }
+        this.setState ({message: "O-la-la"});
+    }
+
+    fetchHandler = async (url) => {
+        const response = await fetch(url)
+        const responseData = await response.json()
+        return responseData
     }
 
     addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
