@@ -4,14 +4,18 @@ from flask_cors import CORS
 app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
 CORS(app)
 
+cities = []
+counter = 0
+
+# please remove this block when you're done with hardcoded cities
 cities = [ 
       {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 1},
       {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 2},
-      {'Name': 'Winnipeg', 'Population': 50, 'Longitude': -2, 'Latitude': 80, 'Counter': 3},
-      {'Name': 'Thanjavur', 'Population': 5, 'Longitude': 30, 'Latitude': -89, 'Counter': 4}      
 ]
+counter = 2
+# end of block to remove
 
-counter = 0
+
 
 # this is just for warmup
 @app.route('/hello')

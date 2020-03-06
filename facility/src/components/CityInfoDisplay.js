@@ -2,27 +2,7 @@ import React from 'react';
 
 class CityInfoDisplay extends React.Component {
 
-    constructor (props) {
-        super (props);
-        this.state = {
-            blink: true
-        }
-
-    }
-
-    componentDidMount () {
-
-        setTimeout( 
-            () => { 
-                this.setState( {blink: false } )
-            } ,
-            2000)
-
-    }
-
     render () {
-
-        const messageClass = this.state.blink ? "widestColumn infoMessageEntryAnimation" : "widestColumn infoMessage" 
 
         return <div className="cityCard">
                     <div className="wideColumn1">
@@ -46,7 +26,7 @@ class CityInfoDisplay extends React.Component {
                     <div className="widestColumn">
                         <button onClick={this.props.fetchHandler}>Fetch</button> 
                     </div>                    
-                    <div className={messageClass}>
+                    <div className="widestColumn infoMessage">
                         {this.props.message}
                     </div>
                 </div>

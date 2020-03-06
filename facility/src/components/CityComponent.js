@@ -17,13 +17,18 @@ class CityComponent extends React.Component {
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
         this.state = {
-            message: "Do something and you'll get to know here.",
+            message: "Trying to load cities.",
             cities: new Cities()
         }
     }
 
     componentDidMount () {
-        this.fetchAll()
+        this.initialize()
+    }
+
+    initialize = async () => {
+        await this.fetchAll()
+        this.setState ({message: "Cities loaded ok"});
     }
 
     fetchAll = async () => {
@@ -39,7 +44,6 @@ class CityComponent extends React.Component {
                 city['Counter']
             );    
         }
-        this.setState ({message: "O-la-la"});
     }
 
     fetchDelete = async (counter) => {
@@ -48,20 +52,40 @@ class CityComponent extends React.Component {
         console.log(responseData);
     }
 
+    fetchAddCity = async (name, population, longitude, latitude) => {
+        const url = 'http://localhost:5000/api/add/' + name + '/' + population + '/' + longitude + '/' + latitude
+        const responseData = await this.fetchHandler(url);
+        console.log(responseData);
+    }
+
+    fetchMoveOut = async (counter, how_many) => {
+        const url = 'http://localhost:5000/api/moveout/' + counter + '/' + how_many
+        const responseData = await this.fetchHandler(url);
+        console.log(responseData);
+    }
+
+    fetchMoveIn = async (counter, how_many) => {
+        const url = 'http://localhost:5000/api/movein/' + counter + '/' + how_many
+        const responseData = await this.fetchHandler(url);
+        console.log(responseData);
+    }
+
+
     fetchHandler = async (url) => {
         const response = await fetch(url)
         const responseData = await response.json()
         return responseData
     }
 
-    addCityHandler = (cityName, cityPopulation, cityLongitude, cityLatitude) => {
+    addCityHandler = async (cityName, cityPopulation, cityLongitude, cityLatitude) => {
 
         let myMessage;
 
         if (cityName.length > 0) {
             if (cityPopulation > 0 && Math.round(cityPopulation) === cityPopulation) {
                 if (cityLongitude <= 180 && cityLongitude >= -180 && cityLatitude <= 90 && cityLatitude >= -90) {
-                    this.state.cities.addCity(cityName, cityPopulation, cityLongitude, cityLatitude);
+                    await this.fetchAddCity(cityName, cityPopulation, cityLongitude, cityLatitude);
+                    await this.fetchAll()
                     myMessage = cityName + " has been created."        
                 } else {
                     myMessage = "We need valid coordinates."
@@ -76,13 +100,14 @@ class CityComponent extends React.Component {
         this.setState ({message: myMessage});
     }
 
-    moveInHandler = (counter, howMany) => {
+    moveInHandler = async (counter, howMany) => {
         let myMessage;
 
         const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
-                this.state.cities.moveIn(counter, howMany);
+                await this.fetchMoveIn(counter, howMany);
+                await this.fetchAll();
                 myMessage = howMany + " citizens emerged in " + cityName + "."        
             } else {
                 // Thank you Dale!
@@ -94,14 +119,15 @@ class CityComponent extends React.Component {
         this.setState ({message: myMessage});
     }
 
-    moveOutHandler = (counter, howMany) => {
+    moveOutHandler = async (counter, howMany) => {
         let myMessage;
 
         const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
                 if (howMany <= this.state.cities.getPopulation(counter)) {
-                    this.state.cities.moveOut(counter, howMany);
+                    await this.fetchMoveOut(counter, howMany);
+                    await this.fetchAll()
                     myMessage = howMany + " citizens vanished from " + cityName + "."    
                 } else {
                     myMessage = "We don't fancy ghost cities."
