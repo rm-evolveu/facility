@@ -11,6 +11,20 @@ class CityController extends React.Component {
         this.cityLatitudeRef = React.createRef();
     }
 
+    superRandom(low, high) {
+        // imagine that low is 0 and high is 10
+        const result = Math.floor(Math.random()*(high - low)) + 1
+        return result
+    }
+
+    randomize () {
+        console.log( this.superRandom(0,10) );
+        this.cityNameRef.current.value = "Thanjavur" // to be continued
+        this.cityPopulationRef.current.value = this.superRandom(0, 50000000); 
+        this.cityLongitudeRef.current.value = this.superRandom(-181, 180);
+        this.cityLatitudeRef.current.value = this.superRandom(-91, 90);
+    }
+
 
 
     render () {
@@ -41,7 +55,18 @@ class CityController extends React.Component {
                         <input type="text" ref={this.cityLatitudeRef}/>
                     </div>
 
-                    <div className="widestColumn">
+                    <div className="wideColumn1">
+                        <button 
+                            onClick={
+                                () => {
+                                    this.randomize() 
+                                }
+                            }>
+                            Randomize
+                        </button>
+                    </div>
+
+                    <div className="wideColumn2">
                         <button 
                             onClick={
                                 () => { 
@@ -56,6 +81,7 @@ class CityController extends React.Component {
                             Genesize
                         </button>
                     </div>
+
                 </div>
 
     }

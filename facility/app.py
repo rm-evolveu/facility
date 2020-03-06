@@ -7,13 +7,13 @@ CORS(app)
 cities = []
 counter = 0
 
-# please remove this block when you're done with hardcoded cities
-cities = [ 
-      {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 1},
-      {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 2},
-]
-counter = 2
-# end of block to remove
+# # please remove this block when you're done with hardcoded cities
+# cities = [ 
+#       {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 1},
+#       {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 2},
+# ]
+# counter = 2
+# # end of block to remove
 
 
 
