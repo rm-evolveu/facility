@@ -2,6 +2,7 @@ import random
 
 from flask import Flask, render_template
 from flask_cors import CORS
+import sqlite3
 
 app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
 CORS(app)
@@ -43,10 +44,29 @@ def services_randomcity():
 def react():
    return render_template('index.html')
 
+#database helpers
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
 # now the real api
 @app.route('/api/all')
+# def api_all():
+#    return { 'Cities': cities }
 def api_all():
-   return { 'Cities': cities }
+   connection = sqlite3.connect("cities.db")
+   connection.row_factory = dict_factory
+   cursor = connection.cursor()
+   query = "SELECT * FROM CITIES"
+   cursor.execute(query)
+   connection.commit()
+   rows = cursor.fetchall()
+   connection.close()
+   return {'Cities': rows }
+
+
 
 @app.route('/api/add/<string:name>/<int:population>/<int:longitude>/<int:latitude>')
 def api_add(name, population, longitude, latitude):
