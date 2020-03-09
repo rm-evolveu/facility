@@ -13,16 +13,16 @@ class CityController extends React.Component {
 
     superRandom(low, high) {
         // imagine that low is 0 and high is 10
-        const result = Math.floor(Math.random()*(high - low)) + 1
+        const result = Math.floor(Math.random()*(high - low + 1)) + low
         return result
     }
 
-    randomize () {
-        console.log( this.superRandom(0,10) );
-        this.cityNameRef.current.value = "Thanjavur" // to be continued
-        this.cityPopulationRef.current.value = this.superRandom(0, 50000000); 
-        this.cityLongitudeRef.current.value = this.superRandom(-181, 180);
-        this.cityLatitudeRef.current.value = this.superRandom(-91, 90);
+    randomize = async () => {
+        console.log (this.props.randomCity);
+        this.cityNameRef.current.value = await this.props.randomCity() // to be continued
+        this.cityPopulationRef.current.value = this.superRandom(1, 100000); 
+        this.cityLongitudeRef.current.value = this.superRandom(-180, 180);
+        this.cityLatitudeRef.current.value = this.superRandom(-90, 90);
     }
 
 

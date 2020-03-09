@@ -8,12 +8,12 @@ button {
 
 .controller {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr)); /* see notes below */
 }
 
 .cityCards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* see notes below */
+    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr)); /* see notes below */
 }
 
 .cityCard {
@@ -57,7 +57,7 @@ button {
 }
 
 .infoMessage {
-    color: chartreuse;
+    color: darkblue;
 }
 
 .infoMessageEntryAnimation {

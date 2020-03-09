@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, render_template
 from flask_cors import CORS
 
@@ -25,6 +27,17 @@ def hello():
 @app.route('/test')
 def test():
    return render_template('test.html', cities = cities, name = "Barbara", number = 10)
+
+@app.route('/services/randomcity')
+def services_randomcity():
+   randomCities = [
+      'Madrid', 'Hamburg', 'Rome', 'Kaoshiung',
+      'Brisbane', 'Shantou', 'Warsaw', 'Hangzhou',
+      'Fortaleza', 'Chengdu', 'Kwangju', 'Kano',
+      'Houston', 'Casablanca', 'Fukuoka', 'Hanoi',
+      'Karachi', 'Dhaka', 'Beijing', 'Saigon'
+   ]
+   return { 'Name': random.choice(randomCities) }
 
 @app.route('/react')
 def react():

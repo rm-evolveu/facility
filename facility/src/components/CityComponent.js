@@ -70,12 +70,22 @@ class CityComponent extends React.Component {
         console.log(responseData);
     }
 
-
     fetchHandler = async (url) => {
         const response = await fetch(url)
         const responseData = await response.json()
         return responseData
     }
+
+    //  this is just a testing area
+
+    randomCity = async () => {
+        const url = 'http://localhost:5000/services/randomcity'
+        const responseData = await this.fetchHandler(url);
+        console.log(responseData);
+        return responseData['Name'];
+    }    
+
+    // 
 
     addCityHandler = async (cityName, cityPopulation, cityLongitude, cityLatitude) => {
 
@@ -159,6 +169,7 @@ class CityComponent extends React.Component {
                     <div className="controller">
                         <CityController
                             addCityHandler = {this.addCityHandler}
+                            randomCity = {this.randomCity}
                         />
                         
                         <CityInfoDisplay
@@ -166,7 +177,7 @@ class CityComponent extends React.Component {
                             mostNorthern = {this.state.cities.getMostNorthern() && this.state.cities.getName(this.state.cities.getMostNorthern())}
                             mostSouthern = {this.state.cities.getMostSouthern() && this.state.cities.getName(this.state.cities.getMostSouthern())}
                             message = {this.state.message}
-                            fetchHandler = {this.fetchHandler}
+                            fetchHandler = {this.randomCity}
                         />
 
                     </div>
