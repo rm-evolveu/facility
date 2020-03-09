@@ -7,8 +7,8 @@ import sqlite3
 app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
 CORS(app)
 
-cities = []
-counter = 0
+# cities = []
+# counter = 0
 
 # # please remove this block when you're done with hardcoded cities
 # cities = [ 
@@ -51,41 +51,38 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-# now the real api
-@app.route('/api/all')
-# def api_all():
-#    return { 'Cities': cities }
-def api_all():
+def run_query(query):
+   print('Trying to query:', query)
    connection = sqlite3.connect("cities.db")
    connection.row_factory = dict_factory
    cursor = connection.cursor()
-   query = "SELECT * FROM CITIES"
    cursor.execute(query)
    connection.commit()
    rows = cursor.fetchall()
    connection.close()
+   return rows
+   
+# now the real api
+@app.route('/api/all')
+def api_all():
+   query = ('SELECT * FROM cities')
+   rows = run_query(query)
    return {'Cities': rows }
 
-
-
-@app.route('/api/add/<string:name>/<int:population>/<int:longitude>/<int:latitude>')
+@app.route('/api/add/<string:name>/<string:population>/<string:longitude>/<string:latitude>')
 def api_add(name, population, longitude, latitude):
-   global cities, counter
-   counter = counter + 1
-   new_city = {'Name': name, 'Population': population, 'Longitude': longitude, 'Latitude': latitude, 'Counter': counter}
-   cities.append ( new_city )
-   return new_city
+   query = "INSERT INTO cities ('Name', 'Population', 'Longitude', 'Latitude') VALUES (" + \
+         "'" + name + "'" + "," + population + "," + longitude + "," + latitude + ")"
+   run_query(query)
+   response = {'Status': 'OK' }
+   return response
 
-@app.route('/api/delete/<int:counter>')
+@app.route('/api/delete/<string:counter>')
 def api_delete(counter):
-   global cities
-   for i in range (0, len(cities) ):
-      if counter == cities[i]['Counter']:
-         deleted_city = cities[i]         
-         del cities[i]
-         break
-
-   return deleted_city
+   query = "DELETE FROM cities WHERE Counter = " + counter
+   run_query(query)
+   response = {'Status': 'OK' }
+   return response
 
 @app.route('/api/movein/<int:counter>/<int:how_many>')
 def api_movein(counter, how_many):

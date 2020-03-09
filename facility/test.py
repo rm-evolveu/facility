@@ -10,6 +10,8 @@ def dict_factory(cursor, row):
 con = sqlite3.connect("cities.db")
 con.row_factory = dict_factory
 cur = con.cursor()
-cur.execute("select * from cities")
+cur.execute("INSERT INTO cities ('Name', 'Population', 'Longitude', 'Latitude') VALUES ('Bob', 5, 3, 2)")
+con.commit()
 rows = cur.fetchall()
+con.close()
 print(rows)
