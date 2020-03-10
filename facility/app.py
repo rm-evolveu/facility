@@ -10,16 +10,6 @@ CORS(app)
 # cities = []
 # counter = 0
 
-# # please remove this block when you're done with hardcoded cities
-# cities = [ 
-#       {'Name': 'Calgary', 'Population': 5000, 'Longitude': 0, 'Latitude': 20, 'Counter': 1},
-#       {'Name': 'Mogadisho', 'Population': 500, 'Longitude': 1, 'Latitude': 10, 'Counter': 2},
-# ]
-# counter = 2
-# # end of block to remove
-
-
-
 # this is just for warmup
 @app.route('/hello')
 def hello():
@@ -52,7 +42,6 @@ def dict_factory(cursor, row):
     return d
 
 def run_query(query):
-   print('Trying to query:', query)
    connection = sqlite3.connect("cities.db")
    connection.row_factory = dict_factory
    cursor = connection.cursor()
@@ -65,46 +54,75 @@ def run_query(query):
 # now the real api
 @app.route('/api/all')
 def api_all():
-   query = ('SELECT * FROM cities')
-   rows = run_query(query)
-   return {'Cities': rows }
+   try:
+      query = ('SELECT * FROM cities')
+      rows = run_query(query)
+      response = {'Cities': rows, 'Status': 0 }
+   except:
+      response = {'Status': -1 }
+   return response
+
+   
+
 
 @app.route('/api/add/<string:name>/<string:population>/<string:longitude>/<string:latitude>')
 def api_add(name, population, longitude, latitude):
-   query = "INSERT INTO cities ('Name', 'Population', 'Longitude', 'Latitude') VALUES (" + \
-         "'" + name + "'" + "," + population + "," + longitude + "," + latitude + ")"
-   run_query(query)
-   response = {'Status': 'OK' }
+   try:
+      query = "INSERT INTO cities ('Name', 'Population', 'Longitude', 'Latitude') VALUES (" + \
+            "'" + name + "'" + "," + population + "," + longitude + "," + latitude + ")"
+      run_query(query)
+      response = {'Status': 0 }
+   except:
+      response = {'Status': -1 }
    return response
 
 @app.route('/api/delete/<string:counter>')
 def api_delete(counter):
-   query = "DELETE FROM cities WHERE Counter = " + counter
-   run_query(query)
-   response = {'Status': 'OK' }
+   try:
+      query = "DELETE FROM cities WHERE Counter = " + counter
+      run_query(query)
+      response = {'Status': 0 }
+   except:
+      response = {'Status': -1 }
    return response
 
-@app.route('/api/movein/<int:counter>/<int:how_many>')
+@app.route('/api/movein/<string:counter>/<int:how_many>')
 def api_movein(counter, how_many):
-   global cities
-   for i in range (0, len(cities) ):
-      if counter == cities[i]['Counter']:
-         cities[i]['Population'] = cities[i]['Population'] + how_many
-         modified_city = cities[i]         
-         break
+   try:
+      query = "SELECT Population FROM cities WHERE Counter = " + counter
+      query_result = run_query(query)
+      if (len(query_result) == 0):
+         response = {'Status': -1}
+      else:
+         new_population = query_result[0]['Population'] + how_many
+         query = "UPDATE cities SET Population = " + str(new_population) + " WHERE Counter = " + counter
+         run_query(query)
+         response = {'Status': 0 }
+   except:
+         response = {'Status': -1}
 
-   return modified_city
-
-@app.route('/api/moveout/<int:counter>/<int:how_many>')
+   return response
+   
+@app.route('/api/moveout/<string:counter>/<int:how_many>')
 def api_moveout(counter, how_many):
-   global cities
-   for i in range (0, len(cities) ):
-      if counter == cities[i]['Counter']:
-         cities[i]['Population'] = cities[i]['Population'] - how_many
-         modified_city = cities[i]         
-         break
+   try:
+      query = "SELECT Population FROM cities WHERE Counter = " + counter
+      query_result = run_query(query)
+      if (len(query_result) == 0):
+         response = {'Status': -1}
+      else:
+         current_population = query_result[0]['Population']
+         if (current_population <= how_many):
+            raise
+         else:
+            new_population = query_result[0]['Population'] - how_many
+            query = "UPDATE cities SET Population = " + str(new_population) + " WHERE Counter = " + counter
+            run_query(query)
+            response = {'Status': 0 }
+   except:
+         response = {'Status': -1}
 
-   return modified_city
-
+   return response
+   
 if __name__ == '__main__':
    app.run(host = '0.0.0.0', debug = True)

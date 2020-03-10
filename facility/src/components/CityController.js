@@ -18,7 +18,6 @@ class CityController extends React.Component {
     }
 
     randomize = async () => {
-        console.log (this.props.randomCity);
         this.cityNameRef.current.value = await this.props.randomCity() // to be continued
         this.cityPopulationRef.current.value = this.superRandom(1, 100000); 
         this.cityLongitudeRef.current.value = this.superRandom(-180, 180);

@@ -28,51 +28,61 @@ class CityComponent extends React.Component {
 
     initialize = async () => {
         await this.fetchAll()
-        this.setState ({message: "Cities loaded ok"});
     }
 
     fetchAll = async () => {
         const url = 'http://localhost:5000/api/all'
         const responseData = await this.fetchHandler(url);
         this.state.cities.flush()
-        for (let city of responseData['Cities']){
-            this.state.cities.addCity(
-                city['Name'],
-                city['Population'],
-                city['Longitude'],
-                city['Latitude'],
-                city['Counter']
-            );    
+        if (responseData.Status === 0) {
+            for (let city of responseData['Cities']) {
+                this.state.cities.addCity(
+                    city['Name'],
+                    city['Population'],
+                    city['Longitude'],
+                    city['Latitude'],
+                    city['Counter']
+                );        
+            }
+            this.setState ({message: "Cities loaded ok"});
+        } else {
+            this.setState ({message: "Could not load cities" });
         }
     }
 
     fetchDelete = async (counter) => {
         const url = 'http://localhost:5000/api/delete/' + counter
         const responseData = await this.fetchHandler(url);
-        console.log(responseData);
+        return responseData.Status
     }
 
     fetchAddCity = async (name, population, longitude, latitude) => {
         const url = 'http://localhost:5000/api/add/' + name + '/' + population + '/' + longitude + '/' + latitude
         const responseData = await this.fetchHandler(url);
-        console.log(responseData);
+        return responseData.Status
     }
 
     fetchMoveOut = async (counter, how_many) => {
         const url = 'http://localhost:5000/api/moveout/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
-        console.log(responseData);
+        return responseData.Status
     }
 
     fetchMoveIn = async (counter, how_many) => {
         const url = 'http://localhost:5000/api/movein/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
-        console.log(responseData);
+        return responseData.Status
     }
 
     fetchHandler = async (url) => {
-        const response = await fetch(url)
-        const responseData = await response.json()
+        let responseData
+        try {
+            const response = await fetch(url)
+            responseData = await response.json()
+            responseData.Status = 0    
+        } catch {
+            responseData = { 'Status' : -1 }
+        }
         return responseData
     }
 
@@ -81,7 +91,6 @@ class CityComponent extends React.Component {
     randomCity = async () => {
         const url = 'http://localhost:5000/services/randomcity'
         const responseData = await this.fetchHandler(url);
-        console.log(responseData);
         return responseData['Name'];
     }    
 
@@ -112,13 +121,18 @@ class CityComponent extends React.Component {
 
     moveInHandler = async (counter, howMany) => {
         let myMessage;
-
+        let result;
         const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
-                await this.fetchMoveIn(counter, howMany);
-                await this.fetchAll();
-                myMessage = howMany + " citizens emerged in " + cityName + "."        
+                this.setState ({message: "Trying to emerge " + howMany + " citizens in " + cityName + "..."})
+                result = await this.fetchMoveIn(counter, howMany);
+                if (result === 0) {
+                    await this.fetchAll()
+                    myMessage = howMany + " citizens emerged in " + cityName + "."        
+                } else {
+                    myMessage = "Could not emerge " + howMany + " citizens in " + cityName + "."
+                }
             } else {
                 // Thank you Dale!
                 myMessage = "We don't deal with fractions of citizens."
@@ -131,14 +145,19 @@ class CityComponent extends React.Component {
 
     moveOutHandler = async (counter, howMany) => {
         let myMessage;
-
+        let result;
         const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
                 if (howMany <= this.state.cities.getPopulation(counter)) {
-                    await this.fetchMoveOut(counter, howMany);
-                    await this.fetchAll()
-                    myMessage = howMany + " citizens vanished from " + cityName + "."    
+                    this.setState ({message: "Trying to vanish " + howMany + " citizens from " + cityName + "..."})
+                    result = await this.fetchMoveOut(counter, howMany);
+                    if (result === 0) {
+                        await this.fetchAll()
+                        myMessage = howMany + " citizens vanished from " + cityName + "."    
+                    } else {
+                        myMessage = "Could not vanish " + howMany + " citizens from " + cityName + "."
+                    }
                 } else {
                     myMessage = "We don't fancy ghost cities."
                 }
@@ -149,16 +168,20 @@ class CityComponent extends React.Component {
         } else {
             myMessage = "We can only vanish a positive number of citizens."
         }
-
-
         this.setState ({message: myMessage});
     }
 
     pandemizeHandler = async (counter) => {
         const cityName = this.state.cities.getName(counter);
-        const myMessage = cityName + " has been pandemized.";
-        await this.fetchDelete(counter)
-        await this.fetchAll()
+        this.setState ({message: "Trying to pandemize " + cityName + "..."})
+        let myMessage
+        const result = await this.fetchDelete(counter)
+        if (result === 0) {
+            myMessage = cityName + " has been pandemized.";
+            await this.fetchAll()
+        } else {
+            myMessage = "Could not pandemize " + cityName + ".";
+        }
         this.setState ({message: myMessage});
     }
 
