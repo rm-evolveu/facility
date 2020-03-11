@@ -1,0 +1,3 @@
+Check the scenario with updating population of non-existing cities
+Check all strings and exception handling
+Check file names and paths

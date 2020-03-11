@@ -5,6 +5,8 @@ import { CityController } from './CityController.js'
 import { Cities } from "./cities.js";
 import './Cities.css';
 
+const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
+
 
 
 class CityComponent extends React.Component {
@@ -31,7 +33,7 @@ class CityComponent extends React.Component {
     }
 
     fetchAll = async () => {
-        const url = 'http://localhost:5000/api/all'
+        const url = 'http://' + hostName + '/api/all'
         const responseData = await this.fetchHandler(url);
         this.state.cities.flush()
         if (responseData.Status === 0) {
@@ -51,25 +53,25 @@ class CityComponent extends React.Component {
     }
 
     fetchDelete = async (counter) => {
-        const url = 'http://localhost:5000/api/delete/' + counter
+        const url = 'http://' + hostName + '/api/delete/' + counter
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
 
     fetchAddCity = async (name, population, longitude, latitude) => {
-        const url = 'http://localhost:5000/api/add/' + name + '/' + population + '/' + longitude + '/' + latitude
+        const url = 'http://' + hostName + '/api/add/' + name + '/' + population + '/' + longitude + '/' + latitude
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
 
     fetchMoveOut = async (counter, how_many) => {
-        const url = 'http://localhost:5000/api/moveout/' + counter + '/' + how_many
+        const url = 'http://' + hostName + '/api/moveout/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
 
     fetchMoveIn = async (counter, how_many) => {
-        const url = 'http://localhost:5000/api/movein/' + counter + '/' + how_many
+        const url = 'http://' + hostName + '/api/movein/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
@@ -89,7 +91,7 @@ class CityComponent extends React.Component {
     //  this is just a testing area
 
     randomCity = async () => {
-        const url = 'http://localhost:5000/services/randomcity'
+        const url = 'http://' + hostName + '/services/randomcity'
         const responseData = await this.fetchHandler(url);
         return responseData['Name'];
     }    

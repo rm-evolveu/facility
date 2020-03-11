@@ -15,10 +15,6 @@ CORS(app)
 def hello():
    return 'Hello from backend'
 
-@app.route('/test')
-def test():
-   return render_template('test.html', cities = cities, name = "Barbara", number = 10)
-
 @app.route('/services/randomcity')
 def services_randomcity():
    randomCities = [
@@ -30,7 +26,7 @@ def services_randomcity():
    ]
    return { 'Name': random.choice(randomCities) }
 
-@app.route('/react')
+@app.route('/')
 def react():
    return render_template('index.html')
 
@@ -42,7 +38,7 @@ def dict_factory(cursor, row):
     return d
 
 def run_query(query):
-   connection = sqlite3.connect("cities.db")
+   connection = sqlite3.connect("/home/ubuntu/flaskapp/cities.db")
    connection.row_factory = dict_factory
    cursor = connection.cursor()
    cursor.execute(query)
@@ -58,8 +54,8 @@ def api_all():
       query = ('SELECT * FROM cities')
       rows = run_query(query)
       response = {'Cities': rows, 'Status': 0 }
-   except:
-      response = {'Status': -1 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
    return response
 
    
@@ -72,8 +68,8 @@ def api_add(name, population, longitude, latitude):
             "'" + name + "'" + "," + population + "," + longitude + "," + latitude + ")"
       run_query(query)
       response = {'Status': 0 }
-   except:
-      response = {'Status': -1 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
    return response
 
 @app.route('/api/delete/<string:counter>')
@@ -82,8 +78,8 @@ def api_delete(counter):
       query = "DELETE FROM cities WHERE Counter = " + counter
       run_query(query)
       response = {'Status': 0 }
-   except:
-      response = {'Status': -1 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
    return response
 
 @app.route('/api/movein/<string:counter>/<int:how_many>')
@@ -98,8 +94,8 @@ def api_movein(counter, how_many):
          query = "UPDATE cities SET Population = " + str(new_population) + " WHERE Counter = " + counter
          run_query(query)
          response = {'Status': 0 }
-   except:
-         response = {'Status': -1}
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
 
    return response
    
@@ -119,8 +115,8 @@ def api_moveout(counter, how_many):
             query = "UPDATE cities SET Population = " + str(new_population) + " WHERE Counter = " + counter
             run_query(query)
             response = {'Status': 0 }
-   except:
-         response = {'Status': -1}
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
 
    return response
    
