@@ -53,7 +53,7 @@ class CityCard extends React.Component {
                             this.props.moveInHandler(this.props.counter, Number(this.myRef.current.value));
                         }
                     }>
-                    Move In
+                    {this.props.messages.CityCard.render.moveIn}
                 </button>
             </div>
             <div className="normalColumn">
@@ -64,7 +64,7 @@ class CityCard extends React.Component {
                             this.props.moveOutHandler(this.props.counter, Number(this.myRef.current.value));
                         }
                     }>
-                    Move Out
+                    {this.props.messages.CityCard.render.moveOut}
                 </button>
             </div>
             <div className="normalColumn">
@@ -75,7 +75,7 @@ class CityCard extends React.Component {
                                 this.props.pandemizeHandler(this.props.counter) 
                             }
                         }>
-                        Pandemize
+                        {this.props.messages.CityCard.render.pandemize}
                     </button>
                 </div>
             </div>

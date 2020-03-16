@@ -6,19 +6,19 @@ class CityInfoDisplay extends React.Component {
 
         return <div className="card controllerCard">
                     <div className="wideColumn1">
-                            Most Northern City:
+                        {this.props.messages.CityInfoDisplay.render.mostNorthernCity}
                     </div>
                     <div className="wideColumn2">
                         {this.props.mostNorthern}
                     </div>
                     <div className="wideColumn1">
-                            Most Southern City:
+                        {this.props.messages.CityInfoDisplay.render.mostSouthernCity}
                     </div>
                     <div className="wideColumn2">
                         {this.props.mostSouthern}
                     </div>
                     <div className="wideColumn1">
-                            Total Population:
+                        {this.props.messages.CityInfoDisplay.render.totalPopulation}
                     </div>
                     <div className="wideColumn2">
                         {this.props.totalPopulation}

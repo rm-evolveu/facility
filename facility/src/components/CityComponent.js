@@ -4,7 +4,11 @@ import { CityInfoDisplay } from './CityInfoDisplay.js';
 import { CityController } from './CityController.js'
 import { Cities } from "./cities.js";
 import './Cities.css';
-import messages from '../strings/messages.js';
+
+// importing locales
+import messages_en_CA from '../strings/messages_en_CA.js';
+import messages_hi_IN from '../strings/messages_hi_IN.js';
+
 
 const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
 
@@ -19,10 +23,15 @@ class CityComponent extends React.Component {
 
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
+
         this.state = {
             message: "Trying to load cities.",
             cities: new Cities(),
-            language: "en_US"
+            language: "hi_IN",
+            messages: {
+                ["en_CA"]: messages_en_CA,
+                ["hi_IN"]: messages_hi_IN
+            }
         }
     }
 
@@ -48,9 +57,9 @@ class CityComponent extends React.Component {
                     city['Counter']
                 );        
             }
-            this.setState ({message: "Cities loaded ok"});
+            this.setState ({message: this.state.messages[this.state.language].CityComponent.fetchAll.citiesLoadedOK});
         } else {
-            this.setState ({message: "Could not load cities" });
+            this.setState ({message: this.state.messages[this.state.language].CityComponent.fetchAll.couldNotLoadCities});
         }
     }
 
@@ -109,15 +118,17 @@ class CityComponent extends React.Component {
                 if (cityLongitude <= 180 && cityLongitude >= -180 && cityLatitude <= 90 && cityLatitude >= -90) {
                     await this.fetchAddCity(cityName, cityPopulation, cityLongitude, cityLatitude);
                     await this.fetchAll()
-                    myMessage = cityName + " has been created."        
+                    // myMessage = this.parser("%s1 has been created.",cityName)        
+                    myMessage = this.parser( this.state.messages[this.state.language].CityComponent.addCityHandler.cityHasBeenCreated, cityName )
+
                 } else {
-                    myMessage = "We need valid coordinates."
+                    myMessage = this.state.messages[this.state.language].CityComponent.addCityHandler.weNeedValidCoordinates
                 }
             } else {
-                myMessage = "We want a non-negative, non-fractional population."
+                myMessage = this.state.messages[this.state.language].CityComponent.addCityHandler.weNeedValidPopulation
             }
         } else {
-            myMessage = "We want our cities to have names."
+            myMessage = this.state.messages[this.state.language].CityComponent.addCityHandler.weNeedCityName
         }
 
         this.setState ({message: myMessage});
@@ -129,20 +140,20 @@ class CityComponent extends React.Component {
         const cityName = this.state.cities.getName(counter);
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
-                this.setState ({message: "Trying to emerge " + howMany + " citizens in " + cityName + "..."})
+                this.setState ( {message: this.parser( this.state.messages[this.state.language].CityComponent.moveInHandler.tryingToEmerge, howMany, cityName) } )
                 result = await this.fetchMoveIn(counter, howMany);
                 if (result === 0) {
                     await this.fetchAll()
-                    myMessage = howMany + " citizens emerged in " + cityName + "."        
+                    myMessage = this.parser( this.state.messages[this.state.language].CityComponent.moveInHandler.emerged, howMany, cityName)
                 } else {
-                    myMessage = "Could not emerge " + howMany + " citizens in " + cityName + "."
+                    myMessage = this.parser( this.state.messages[this.state.language].CityComponent.moveInHandler.couldNotEmerge, howMany, cityName)
                 }
             } else {
                 // Thank you Dale!
-                myMessage = "We don't deal with fractions of citizens."
+                myMessage = this.state.messages[this.state.language].CityComponent.moveInHandler.noFractions
             }
         } else {
-            myMessage = "We can only emerge a positive number of citizens."
+            myMessage = this.state.messages[this.state.language].CityComponent.moveInHandler.noNegatives
         }
         this.setState ({message: myMessage});
     }
@@ -154,39 +165,51 @@ class CityComponent extends React.Component {
         if (howMany > 0) {
             if (Math.round(howMany) === howMany) {
                 if (howMany <= this.state.cities.getPopulation(counter)) {
-                    this.setState ({message: "Trying to vanish " + howMany + " citizens from " + cityName + "..."})
+                    this.setState ( {message: this.parser( this.state.messages[this.state.language].CityComponent.moveOutHandler.tryingToVanish, howMany, cityName) } )
                     result = await this.fetchMoveOut(counter, howMany);
                     if (result === 0) {
                         await this.fetchAll()
-                        myMessage = howMany + " citizens vanished from " + cityName + "."    
+                        myMessage = this.parser( this.state.messages[this.state.language].CityComponent.moveOutHandler.vanished, howMany, cityName)
                     } else {
-                        myMessage = "Could not vanish " + howMany + " citizens from " + cityName + "."
+                        myMessage = this.parser( this.state.messages[this.state.language].CityComponent.moveOutHandler.couldNotVanish, howMany, cityName)
                     }
                 } else {
-                    myMessage = "We don't fancy ghost cities."
+                    myMessage = this.state.messages[this.state.language].CityComponent.moveOutHandler.noGhostCities
                 }
             } else {
                 // Thank you Dale!
-                myMessage = "We don't deal with fractions of citizens."
+                myMessage = this.state.messages[this.state.language].CityComponent.moveOutHandler.noFractions
             }
         } else {
-            myMessage = "We can only vanish a positive number of citizens."
+            myMessage = this.state.messages[this.state.language].CityComponent.moveOutHandler.noNegatives
         }
         this.setState ({message: myMessage});
     }
 
     pandemizeHandler = async (counter) => {
         const cityName = this.state.cities.getName(counter);
-        this.setState ({message: "Trying to pandemize " + cityName + "..."})
+        this.setState ( {message: this.parser( this.state.messages[this.state.language].CityComponent.pandemizeHandler.tryingToPandemize, cityName) } )
         let myMessage
         const result = await this.fetchDelete(counter)
         if (result === 0) {
-            myMessage = cityName + " has been pandemized.";
+            myMessage = this.parser( this.state.messages[this.state.language].CityComponent.pandemizeHandler.pandemized, cityName)
             await this.fetchAll()
         } else {
-            myMessage = "Could not pandemize " + cityName + ".";
+            myMessage = this.parser( this.state.messages[this.state.language].CityComponent.pandemizeHandler.couldNotPandemize, cityName)
         }
         this.setState ({message: myMessage});
+    }
+
+    // helper functions
+
+    parser = (...args) => {
+        const str = args[0];
+        const params = args.filter((arg, index) => index !== 0);
+        if (!str) return "";
+        return str.replace(/%s[0-9]+/g, matchedStr => {
+          const variableIndex = matchedStr.replace("%s", "") - 1;
+          return params[variableIndex];
+        });
     }
 
 
@@ -197,6 +220,7 @@ class CityComponent extends React.Component {
                         <CityController
                             addCityHandler = {this.addCityHandler}
                             randomCity = {this.randomCity}
+                            messages={this.state.messages[this.state.language]}
                         />
                         
                         <CityInfoDisplay
@@ -205,6 +229,7 @@ class CityComponent extends React.Component {
                             mostSouthern = {this.state.cities.getMostSouthern() && this.state.cities.getName(this.state.cities.getMostSouthern())}
                             message = {this.state.message}
                             fetchHandler = {this.randomCity}
+                            messages={this.state.messages[this.state.language]}
                         />
 
                     </div>
@@ -221,7 +246,7 @@ class CityComponent extends React.Component {
                                             pandemizeHandler={this.pandemizeHandler}
                                             counter={counter}
                                             key={counter}
-                                            messages={messages[this.state.language]}
+                                            messages={this.state.messages[this.state.language]}
                                         />
                         )}
                     </div>

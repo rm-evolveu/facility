@@ -30,25 +30,25 @@ class CityController extends React.Component {
 
         return <div className="card controllerCard">
                     <div className="wideColumn1">
-                            Name:
+                        {this.props.messages.CityController.render.name}
                     </div>
                     <div className="wideColumn2">
                         <input type="text" ref={this.cityNameRef}/>
                     </div>
                     <div className="wideColumn1">
-                            Population:
+                        {this.props.messages.CityController.render.population}
                     </div>
                     <div className="wideColumn2">
                         <input type="text" ref={this.cityPopulationRef}/>
                     </div>
                     <div className="wideColumn1">
-                            Longitude:
+                        {this.props.messages.CityController.render.longitude}
                     </div>
                     <div className="wideColumn2">
                         <input type="text" ref={this.cityLongitudeRef}/>
                     </div>
                     <div className="wideColumn1">
-                            Latitude:
+                        {this.props.messages.CityController.render.latitude}
                     </div>
                     <div className="wideColumn2">
                         <input type="text" ref={this.cityLatitudeRef}/>
@@ -61,7 +61,7 @@ class CityController extends React.Component {
                                     this.randomize() 
                                 }
                             }>
-                            Randomize
+                            {this.props.messages.CityController.render.randomize}
                         </button>
                     </div>
 
@@ -77,7 +77,7 @@ class CityController extends React.Component {
                                     );
                                 }
                             }>
-                            Genesize
+                            {this.props.messages.CityController.render.genesize}
                         </button>
                     </div>
 
