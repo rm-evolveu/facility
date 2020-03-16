@@ -4,6 +4,7 @@ import { CityInfoDisplay } from './CityInfoDisplay.js';
 import { CityController } from './CityController.js'
 import { Cities } from "./cities.js";
 import './Cities.css';
+import messages from '../strings/messages.js';
 
 const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
 
@@ -20,7 +21,8 @@ class CityComponent extends React.Component {
         // [ {city: {city}, {counter: autoincrement } }]
         this.state = {
             message: "Trying to load cities.",
-            cities: new Cities()
+            cities: new Cities(),
+            language: "en_US"
         }
     }
 
@@ -219,6 +221,7 @@ class CityComponent extends React.Component {
                                             pandemizeHandler={this.pandemizeHandler}
                                             counter={counter}
                                             key={counter}
+                                            messages={messages[this.state.language]}
                                         />
                         )}
                     </div>

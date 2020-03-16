@@ -4,7 +4,7 @@ class CityInfoDisplay extends React.Component {
 
     render () {
 
-        return <div className="cityCard">
+        return <div className="card controllerCard">
                     <div className="wideColumn1">
                             Most Northern City:
                     </div>

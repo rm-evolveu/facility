@@ -11,33 +11,33 @@ class CityCard extends React.Component {
 
     render () {
 
-        return <div className="cityCard">
+        return <div className="card cityCard">
             <div className="wideColumn1">
-                City ID:
+                {this.props.messages.CityCard.render.cityID}
             </div>
             <div className="wideColumn2">
                 {this.props.counter}
             </div>
             <div className="wideColumn1">
-                City Name:
+                {this.props.messages.CityCard.render.cityName}
             </div>
             <div className="wideColumn2">
                 {this.props.cityName}
             </div>
             <div className="wideColumn1">
-                Population:
+                {this.props.messages.CityCard.render.population}
             </div>
             <div className="wideColumn2">
                 {this.props.cityPopulation}
             </div>
             <div className="wideColumn1">
-                Location:
+                {this.props.messages.CityCard.render.location}
             </div>
             <div className="wideColumn2">
                 {this.props.cityHemisphere}
             </div>
             <div className="wideColumn1">
-                Size:
+                {this.props.messages.CityCard.render.size}
             </div>
             <div className="wideColumn2">
                 {this.props.cityHowBig}

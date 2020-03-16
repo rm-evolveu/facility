@@ -16,17 +16,27 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(425px, 1fr)); /* see notes below */
 }
 
-.cityCard {
+.card {
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
     grid-auto-rows: 1.5em; 
     column-gap: 10px;
 
     border-radius: 10px;
-    background-color: deepskyblue;
     padding: 5px;
     margin: 5px;
 }
+
+.controllerCard {
+    background-color: turquoise;
+}
+
+
+.cityCard {
+    background-color: deepskyblue;
+}
+
+
 
 .widestColumn { 
     grid-column-start: 1; 

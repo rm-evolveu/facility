@@ -28,7 +28,7 @@ class CityController extends React.Component {
 
     render () {
 
-        return <div className="cityCard">
+        return <div className="card controllerCard">
                     <div className="wideColumn1">
                             Name:
                     </div>
