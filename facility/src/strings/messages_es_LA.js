@@ -64,5 +64,4 @@ const messages_es_LA = {
         }
     }
 }
-
 export default messages_es_LA;
