@@ -14,6 +14,7 @@ const messages_es_LA = {
             location: "Ubicación:",
             size: "Tamaño:",
             moveIn: "Instalarse",
+            moveOut: "Mudarse",
             pandemize: "Pandemizar",
         }
     },
