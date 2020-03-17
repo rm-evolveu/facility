@@ -64,5 +64,4 @@ const messages_en_CA = {
         }
     }    
 }
-
 export default messages_en_CA;

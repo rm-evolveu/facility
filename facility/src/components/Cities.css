@@ -1,19 +1,19 @@
 input {
-    width: 7em;
+    width: 9em;
 } 
 
 button {
-    width: 7em;
+    width: 9em;
 } 
 
 .controller {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr)); /* see notes below */
+    grid-template-columns: repeat(auto-fill, minmax(555px, 1fr)); /* see notes below */
 }
 
 .cityCards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(425px, 1fr)); /* see notes below */
+    grid-template-columns: repeat(auto-fill, minmax(555px, 1fr)); /* see notes below */
 }
 
 .card {
@@ -68,14 +68,4 @@ button {
 
 .infoMessage {
     color: white;
-}
-
-
-.infoMessageEntryAnimation {
-    color: red;
-    animation:  blinker 2s linear infinite;
-}
-
-@keyframes blinker {  
-    50% { opacity: 0; }
 }

@@ -1,21 +1,21 @@
 const messages_hi_IN = {
     CityInfoDisplay: {
         render: {
-            mostNorthernCity: "TODO Most Northern:",
-            mostSouthernCity: "TODO Most Southern:",
-            totalPopulation: "TODO Population:"
+            mostNorthernCity: "सबसे उत्तरी शहर:",
+            mostSouthernCity: "सबसे दक्षिणी श:",
+            totalPopulation: "कुल जनसंख्या:"
         }
     },
     CityCard: {
         render: {
-            cityID: "TODO ID:",
-            cityName: "TODO Name:",
-            population: "TODO Population:",
-            location: "TODO Location:",
-            size: "TODO Size:",
-            moveIn: "TODO In",
-            moveOut: "TODO Out",
-            pandemize: "TODO Pand",
+            cityID: "शहर की आईडी:",
+            cityName: "शहर का नाम:",
+            population: "आबादी:",
+            location: "स्थान:",
+            size: "आकार:",
+            moveIn: "शामिल करें",
+            moveOut: "निकालें",
+            pandemize: "महामारी करते हैं",
         }
     },
     CityController: {
@@ -43,7 +43,7 @@ const messages_hi_IN = {
             weNeedCityName: "हम चाहते हैं कि हमारे शहरों के नाम हों",    
         },
         moveInHandler: {
-            tryingToEmerge: "%s2 में %s1 नागरिकों को उभरने की कोशिश कर रहा है...",
+            tryingToEmerge: "% S2 में% s1 नागरिकों को उभरने की कोशिश कर रहा है...",
             emerged: "%s1 नागरिक %s2 में उभरे।",
             couldNotEmerge: "%s1 में %s1 नागरिक नहीं उभर सके।",
             noFractions: "हम नागरिकों की आंशिक संख्या नहीं करते हैं।",
@@ -64,5 +64,4 @@ const messages_hi_IN = {
         }
     }
 }
-
-export default messages_hi_IN
+export default messages_hi_IN;

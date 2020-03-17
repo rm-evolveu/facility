@@ -7,7 +7,11 @@ import './Cities.css';
 
 // importing locales
 import messages_en_CA from '../strings/messages_en_CA.js';
+import messages_es_LA from '../strings/messages_es_LA.js';
 import messages_hi_IN from '../strings/messages_hi_IN.js';
+import messages_it_IT from '../strings/messages_it_IT.js';
+import messages_so_SO from '../strings/messages_so_SO.js';
+import messages_zh_CN from '../strings/messages_zh_CN.js';
 
 
 const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
@@ -29,8 +33,12 @@ class CityComponent extends React.Component {
             cities: new Cities(),
             language: "hi_IN",
             messages: {
-                ["en_CA"]: messages_en_CA,
-                ["hi_IN"]: messages_hi_IN
+                "en_CA": messages_en_CA,
+                "es_LA": messages_es_LA,
+                "hi_IN": messages_hi_IN,
+                "it_IT": messages_it_IT,
+                "so_SO": messages_so_SO,
+                "zh_CN": messages_zh_CN,
             }
         }
     }
