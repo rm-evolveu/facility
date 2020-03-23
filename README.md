@@ -1,6 +1,6 @@
 # The facility repository
 
-This resository is a sandbox of code for the use of the learners of EvolveU  
+This repository is a sandbox of code for the use of the learners of EvolveU  
 
 Here's how we start it:  
 
