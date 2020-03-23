@@ -1,4 +1,6 @@
 const messages_so_SO = {
+	languageLabel: "Af-Soomaali",
+
 	CityInfoDisplay: {
 		render: {
 			mostNorthernCity: "Inta badan Waqooyiga Magaalada:",

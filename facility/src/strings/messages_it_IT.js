@@ -1,8 +1,10 @@
 const messages_it_IT = {
+    languageLabel: "Italiano",
+
 	CityInfoDisplay: {
 		render: {
-			mostNorthernCity: "La maggior parte della città settentrionale:",
-			mostSouthernCity: "La maggior parte della città del sud:",
+			mostNorthernCity: "Città più settentrionale:",
+			mostSouthernCity: "Città più meridionale:",
 			totalPopulation: "Popolazione totale:"
 		}
 	},

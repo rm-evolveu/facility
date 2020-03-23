@@ -1,3 +1,8 @@
 Check the scenario with updating population of non-existing cities
 Check all strings and exception handling
 Check file names and paths
+
+Our pandemize message is being overwritten by fetchAll after pandemize
+what do we do about that?
+
+Same problem as above for creating cities

@@ -1,4 +1,6 @@
 const messages_hi_IN = {
+    languageLabel: "हिंदी",
+
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "सबसे उत्तरी शहर:",

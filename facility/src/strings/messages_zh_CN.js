@@ -1,4 +1,6 @@
 const messages_zh_CN = {
+	languageLabel: "中文",
+
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "最北端的城市：",

@@ -1,4 +1,6 @@
 const messages_en_CA = {
+    languageLabel: "English",
+    
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "Most Northern City:",

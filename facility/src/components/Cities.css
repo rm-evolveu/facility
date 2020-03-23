@@ -53,6 +53,11 @@ button {
     grid-column-end: 5; 
 }
 
+.wideColumn { 
+    grid-column: span 2;
+}
+
+
 .normalColumn {
     justify-self: center;
 }
