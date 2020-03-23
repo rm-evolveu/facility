@@ -2,6 +2,7 @@ import React from 'react';
 import { CityCard } from './CityCard.js';
 import { CityInfoDisplay } from './CityInfoDisplay.js';
 import { CityController } from './CityController.js'
+import { CitySettings } from './CitySettings.js'
 import { Cities } from "./cities.js";
 import './Cities.css';
 
@@ -31,7 +32,7 @@ class CityComponent extends React.Component {
         this.state = {
             message: "Trying to load cities.",
             cities: new Cities(),
-            language: "hi_IN",
+            language: "zh_CN",
             messages: {
                 "en_CA": messages_en_CA,
                 "es_LA": messages_es_LA,
@@ -208,6 +209,12 @@ class CityComponent extends React.Component {
         this.setState ({message: myMessage});
     }
 
+    languageHandler = (event) => {
+        console.log('Language Handler')
+        console.log(event.currentTarget.value)
+        this.setState ({language: event.currentTarget.value})
+    }
+
     // helper functions
 
     parser = (...args) => {
@@ -238,6 +245,10 @@ class CityComponent extends React.Component {
                             message = {this.state.message}
                             fetchHandler = {this.randomCity}
                             messages={this.state.messages[this.state.language]}
+                        />
+
+                        <CitySettings
+                            languageHandler = {this.languageHandler}
                         />
 
                     </div>
