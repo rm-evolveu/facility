@@ -4,8 +4,8 @@ const messages_so_SO = {
 	pojoStrings: {
         "Hamlet": "Hamlet",
         "Village": "Tuulo",
-        "Town": "Magaalo",
-        "Large town": "Magaalada weyn",
+        "Town": "Magaalada weyn",
+        "Large town": "Magaalo weyn",
         "City": "City",
 
         "Equator": "Caadi",
