@@ -35,7 +35,6 @@ class Cities {
     getCity (counter) {
 
         const myTestingFunction = (element) => element.counter === counter;
-        // console.log("counter", counter, typeof(counter))
 
         return this.cities.find(myTestingFunction).city;
 

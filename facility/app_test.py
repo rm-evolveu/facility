@@ -3,7 +3,6 @@ import app
 
 class app_test1(unittest.TestCase):
     def test_if_tests_are_working(self):
-        # print('test adding a city 1')
         self.assertEqual(True,True)
 
     def test_adding_a_city(self):

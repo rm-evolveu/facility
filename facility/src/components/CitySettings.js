@@ -14,9 +14,6 @@ class CitySettings extends React.Component {
 
     render () {
 
-        console.log("City settings")
-        console.log(Object.keys(this.props.messages))
-
         return <div className="card controllerCard">
                     <div className="widestColumn">Settings</div>
 

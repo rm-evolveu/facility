@@ -213,8 +213,6 @@ class CityComponent extends React.Component {
     }
 
     languageHandler = (event) => {
-        console.log('Language Handler')
-        console.log(event.currentTarget.value)
         this.setState ({language: event.currentTarget.value})
     }
 

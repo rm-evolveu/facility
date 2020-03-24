@@ -2,7 +2,7 @@ const messages_es_LA = {
     languageLabel: "Español",
 
     pojoStrings: {
-        "Hamlet": "Pueblo",
+        "Hamlet": "Aldea",
         "Village": "Villa",
         "Town": "Municipalidad",
         "Large town": "Ciudad",

@@ -49,7 +49,6 @@ class CityCard extends React.Component {
                 <button 
                     onClick={
                         () => { 
-                            console.log("Ou-la-la!",this.myRef.current.value);
                             this.props.moveInHandler(this.props.counter, Number(this.myRef.current.value));
                         }
                     }>
@@ -60,7 +59,6 @@ class CityCard extends React.Component {
                 <button 
                     onClick={
                         () => { 
-                            console.log("Out-la-la!",this.myRef.current.value);
                             this.props.moveOutHandler(this.props.counter, Number(this.myRef.current.value));
                         }
                     }>
