@@ -16,6 +16,7 @@ import messages_zh_CN from '../strings/messages_zh_CN.js';
 
 
 const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
+// const hostName = 'localhost:5000'
 
 
 
@@ -29,10 +30,11 @@ class CityComponent extends React.Component {
         // array of objects containing city and key
         // [ {city: {city}, {counter: autoincrement } }]
 
+        this.defaultLanguage = "zh_CN"
+
         this.state = {
             message: "Trying to load cities.",
             cities: new Cities(),
-            language: "en_CA",
             messages: {
                 "en_CA": messages_en_CA,
                 "es_LA": messages_es_LA,
@@ -43,6 +45,15 @@ class CityComponent extends React.Component {
             },
         }
 
+        let storedLanguage = localStorage.getItem('language')
+
+        if (storedLanguage !== null) {
+            this.state.language = storedLanguage
+        } else {
+            this.state.language = this.defaultLanguage
+            localStorage.setItem('language', this.defaultLanguage)
+        }
+
         this.messageBuilder = () => "Trying to load cities.";
     }
 
@@ -51,11 +62,18 @@ class CityComponent extends React.Component {
     }
 
     initialize = async () => {
-        await this.fetchAll()
+        const status = await this.fetchAll()
+        if (status === 0) {
+            this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.fetchAll.citiesLoadedOK
+        } else {
+            this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.fetchAll.couldNotLoadCities
+        }
+        this.update()
     }
 
     update = () => {
-        this.setState({message: this.messageBuilder()})
+        const newMessage = this.messageBuilder()
+        this.setState({message: newMessage})
     }
 
     fetchAll = async () => {
@@ -72,12 +90,8 @@ class CityComponent extends React.Component {
                     city['Counter']
                 );        
             }
-            this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.fetchAll.citiesLoadedOK
-            this.update()
-        } else {
-            this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.fetchAll.couldNotLoadCities
-            this.update()
         }
+        return responseData.Status
     }
 
     fetchDelete = async (counter) => {
@@ -109,7 +123,6 @@ class CityComponent extends React.Component {
         try {
             const response = await fetch(url)
             responseData = await response.json()
-            responseData.Status = 0    
         } catch {
             responseData = { 'Status' : -1 }
         }
@@ -154,11 +167,11 @@ class CityComponent extends React.Component {
                 this.update()
                 result = await this.fetchMoveIn(counter, howMany);
                 if (result === 0) {
-                    await this.fetchAll()                    
                     this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.moveInHandler.emerged, howMany, cityName)
-                    } else {
+                } else {
                     this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.moveInHandler.couldNotEmerge, howMany, cityName)
                 }
+                await this.fetchAll()                    
             } else {
                 // Thank you Dale!
                 this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.moveInHandler.noFractions
@@ -179,11 +192,11 @@ class CityComponent extends React.Component {
                     this.update()
                     result = await this.fetchMoveOut(counter, howMany);
                     if (result === 0) {
-                        await this.fetchAll()                        
                         this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.moveOutHandler.vanished, howMany, cityName)
                     } else {                        
                         this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.moveOutHandler.couldNotVanish, howMany, cityName)
                     }
+                    await this.fetchAll()                        
                 } else {
                     this.messageBuilder = () => this.state.messages[this.state.language].CityComponent.moveOutHandler.noGhostCities
                 }
@@ -204,15 +217,16 @@ class CityComponent extends React.Component {
         const result = await this.fetchDelete(counter)
         if (result === 0) {
             this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.pandemizeHandler.pandemized, cityName)
-            await this.fetchAll()
         } else {
             this.messageBuilder = () => this.parser( this.state.messages[this.state.language].CityComponent.pandemizeHandler.couldNotPandemize, cityName)
         }
+        await this.fetchAll()
         this.update()
         // this.update(myMessage)
     }
 
     languageHandler = (event) => {
+        localStorage.setItem('language', event.currentTarget.value)
         this.setState ({language: event.currentTarget.value})
     }
 
@@ -252,6 +266,7 @@ class CityComponent extends React.Component {
                         <CitySettings
                             languageHandler = {this.languageHandler}
                             messages = {this.state.messages}
+                            currentLanguage = {this.state.language}
                         />
 
                     </div>

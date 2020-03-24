@@ -2,9 +2,14 @@ Check the scenario with updating population of non-existing cities
 Check all strings and exception handling
 Check file names and paths
 
-Our pandemize message is being overwritten by fetchAll after pandemize
-what do we do about that?
+>> Deployment:
+- Ensure you update cities.db location
+- Ensure you update backend host in CityComponent.js
 
-Same problem as above for creating cities
+- Decide if to differentiate exceptions and row_count with different status codes in the backend
+- What should the 'message' be when row_count is 0
 
-Remove all console logs
+- Make messages more intuitive (could not pandemize)
+
+- Chrome load page from cache on restart, so radio button is wrong
+- Opera OK
