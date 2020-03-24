@@ -1,6 +1,18 @@
 const messages_en_CA = {
     languageLabel: "English",
-    
+
+    pojoStrings: {
+        "Hamlet": "Hamlet",
+        "Village": "Village",
+        "Town": "Town",
+        "Large town": "Large town",
+        "City": "City",
+
+        "Equator": "Equator",
+        "Northern Hemisphere": "Northern",
+        "Southern Hemisphere": "Southern",
+    },
+
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "Most Northern City:",

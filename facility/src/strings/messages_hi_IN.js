@@ -1,6 +1,18 @@
 const messages_hi_IN = {
     languageLabel: "हिंदी",
 
+    pojoStrings: {
+        "Hamlet": "छोटा गांव",
+        "Village": "गाँव",
+        "Town": "नगर",
+        "Large town": "बड़ा नगर",
+        "City": "शहर",
+
+        "Equator": "भूमध्य रेखा",
+        "Northern Hemisphere": "उत्तरी गोलार्द्ध",
+        "Southern Hemisphere": "दक्षिणी गोलार्द्ध",
+    },
+
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "सबसे उत्तरी शहर:",

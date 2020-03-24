@@ -1,5 +1,17 @@
 const messages_it_IT = {
-    languageLabel: "Italiano",
+	languageLabel: "Italiano",
+	
+	pojoStrings: {
+        "Hamlet": "Hamlet",
+        "Village": "Village",
+        "Town": "Town",
+        "Large town": "Large town",
+        "City": "City",
+
+        "Equator": "Equator",
+        "Northern Hemisphere": "Northern",
+        "Southern Hemisphere": "Southern",
+    },
 
 	CityInfoDisplay: {
 		render: {

@@ -6,3 +6,5 @@ Our pandemize message is being overwritten by fetchAll after pandemize
 what do we do about that?
 
 Same problem as above for creating cities
+
+Remove all console logs

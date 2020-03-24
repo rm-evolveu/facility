@@ -1,5 +1,17 @@
 const messages_zh_CN = {
-	languageLabel: "中文",
+    languageLabel: "中文",
+    
+    pojoStrings: {
+        "Hamlet": "小村",
+        "Village": "村庄",
+        "Town": "镇",
+        "Large town": "县城",
+        "City": "城市",
+
+        "Equator": "赤道",
+        "Northern Hemisphere": "北半球",
+        "Southern Hemisphere": "南半球",
+    },
 
     CityInfoDisplay: {
         render: {

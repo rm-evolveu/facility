@@ -34,13 +34,13 @@ class CityCard extends React.Component {
                 {this.props.messages.CityCard.render.location}
             </div>
             <div className="wideColumn2">
-                {this.props.cityHemisphere}
+                {this.props.messages.pojoStrings[this.props.cityHemisphere]}
             </div>
             <div className="wideColumn1">
                 {this.props.messages.CityCard.render.size}
             </div>
             <div className="wideColumn2">
-                {this.props.cityHowBig}
+                {this.props.messages.pojoStrings[this.props.cityHowBig]}
             </div>
             <div className="normalColumn">
                 <input type="number" ref={this.myRef}/>

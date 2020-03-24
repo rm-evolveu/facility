@@ -1,6 +1,18 @@
 const messages_es_LA = {
     languageLabel: "Español",
 
+    pojoStrings: {
+        "Hamlet": "Pueblo",
+        "Village": "Villa",
+        "Town": "Municipalidad",
+        "Large town": "Ciudad",
+        "City": "Gran Ciudad",
+
+        "Equator": "Ecuador",
+        "Northern Hemisphere": "Hemisferio Norte",
+        "Southern Hemisphere": "Hemisferio Sur",
+    },
+
     CityInfoDisplay: {
         render: {
             mostNorthernCity: "Ciudad más norteña:",
