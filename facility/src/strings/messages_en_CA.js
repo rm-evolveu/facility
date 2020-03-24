@@ -9,8 +9,8 @@ const messages_en_CA = {
         "City": "City",
 
         "Equator": "Equator",
-        "Northern Hemisphere": "Northern",
-        "Southern Hemisphere": "Southern",
+        "Northern Hemisphere": "Northern Hemisphere",
+        "Southern Hemisphere": "Southern Hemisphere",
     },
 
     CityInfoDisplay: {

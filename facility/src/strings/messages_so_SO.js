@@ -3,14 +3,14 @@ const messages_so_SO = {
 
 	pojoStrings: {
         "Hamlet": "Hamlet",
-        "Village": "Village",
-        "Town": "Town",
-        "Large town": "Large town",
+        "Village": "Tuulo",
+        "Town": "Magaalo",
+        "Large town": "Magaalada weyn",
         "City": "City",
 
-        "Equator": "Equator",
-        "Northern Hemisphere": "Northern",
-        "Southern Hemisphere": "Southern",
+        "Equator": "Caadi",
+        "Northern Hemisphere": "Hemisphere waqooyiga",
+        "Southern Hemisphere": "Hemisphere koonfurta",
     },
 
 	CityInfoDisplay: {
