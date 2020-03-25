@@ -73,7 +73,7 @@ const messages_es_LA = {
         },
         pandemizeHandler: {
             tryingToPandemize: "Pandemizando %s1...",
-            pandemized: "La ciudad de %s1 han sido pandemizada",
+            pandemized: "Ciudad %s1 han sido pandemizada",
             couldNotPandemize: "No se pudo pandemizar %s1"    
         }
     }
