@@ -5,6 +5,7 @@ Check file names and paths
 >> Deployment:
 - Ensure you update cities.db location
 - Ensure you update backend host in CityComponent.js
+>> Deployment:
 
 - Decide if to differentiate exceptions and row_count with different status codes in the backend
 - What should the 'message' be when row_count is 0
@@ -13,3 +14,8 @@ Check file names and paths
 
 - Chrome load page from cache on restart, so radio button is wrong
 - Opera OK
+
+- Please build backend routes in frontend in a smarter way than
+- http://' + hostName + '/api/ddb/all
+
+- Do we need to check the uniqueness of uuid4()

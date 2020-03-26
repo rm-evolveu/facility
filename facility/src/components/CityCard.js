@@ -16,7 +16,7 @@ class CityCard extends React.Component {
                 {this.props.messages.CityCard.render.cityID}
             </div>
             <div className="wideColumn2">
-                {this.props.counter}
+                {this.props.counter.substring(0,8)}
             </div>
             <div className="wideColumn1">
                 {this.props.messages.CityCard.render.cityName}

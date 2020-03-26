@@ -15,8 +15,8 @@ import messages_so_SO from '../strings/messages_so_SO.js';
 import messages_zh_CN from '../strings/messages_zh_CN.js';
 
 
-const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
-// const hostName = 'localhost:5000'
+// const hostName = 'ec2-54-91-22-211.compute-1.amazonaws.com'
+const hostName = 'localhost:5000'
 
 
 
@@ -77,7 +77,7 @@ class CityComponent extends React.Component {
     }
 
     fetchAll = async () => {
-        const url = 'http://' + hostName + '/api/all'
+        const url = 'http://' + hostName + '/api/ddb/all'
         const responseData = await this.fetchHandler(url);
         this.state.cities.flush()
         if (responseData.Status === 0) {
@@ -95,13 +95,13 @@ class CityComponent extends React.Component {
     }
 
     fetchDelete = async (counter) => {
-        const url = 'http://' + hostName + '/api/delete/' + counter
+        const url = 'http://' + hostName + '/api/ddb/delete/' + counter
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
 
     fetchAddCity = async (name, population, longitude, latitude) => {
-        const url = 'http://' + hostName + '/api/add/' + name + '/' + population + '/' + longitude + '/' + latitude
+        const url = 'http://' + hostName + '/api/ddb/add/' + name + '/' + population + '/' + longitude + '/' + latitude
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }

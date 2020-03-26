@@ -4,6 +4,35 @@ from flask import Flask, render_template
 from flask_cors import CORS
 import sqlite3
 
+# dynamodb modifications
+import boto3
+import pprint
+import uuid
+
+
+# helper for decimal
+import decimal
+def replace_decimals(obj):
+    if isinstance(obj, list):
+        for i in range(len(obj)):
+            obj[i] = replace_decimals(obj[i])
+        return obj
+    elif isinstance(obj, dict):
+        for k in obj.keys():
+            obj[k] = replace_decimals(obj[k])
+        return obj
+    elif isinstance(obj, decimal.Decimal):
+        if obj % 1 == 0:
+            return int(obj)
+        else:
+            return float(obj)
+    else:
+        return obj
+
+# dynamodb modifications
+
+
+
 app = Flask(__name__, template_folder = 'build', static_folder = 'build/static')
 CORS(app)
 
@@ -50,6 +79,17 @@ def run_query(query):
    return { 'rows': rows, 'row_count': row_count }
 
 # now the real api
+@app.route('/api/ddb/all')
+def api_ddb_all():
+   try:
+      dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
+      table = dynamodb.Table('cities')
+      resp = replace_decimals(table.scan())
+      response = {'Cities': resp['Items'], 'Status': 0 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
+   return response
+
 @app.route('/api/all')
 def api_all():
    try:
@@ -60,9 +100,25 @@ def api_all():
       response = {'Status': -1, 'Message': str(e) }
    return response
 
+@app.route('/api/ddb/add/<string:name>/<string:population>/<string:longitude>/<string:latitude>')
+def api_ddb_add(name, population, longitude, latitude):
+   try:
+      dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
+      table = dynamodb.Table('cities')
+
+      with table.batch_writer() as batch:
+         batch.put_item(Item={"Counter": str(uuid.uuid4()), "Name": name,
+            "Population": population, "Longitude": longitude, "Latitude": latitude })
+
+      response = {'Status': 0 }
+
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
+
+   return response
+
 @app.route('/api/add/<string:name>/<string:population>/<string:longitude>/<string:latitude>')
 def api_add(name, population, longitude, latitude):
-   print('Hello there')
    try:
       query = "INSERT INTO cities ('Name', 'Population', 'Longitude', 'Latitude') VALUES (" + \
             "'" + name + "'" + "," + population + "," + longitude + "," + latitude + ")"
@@ -74,6 +130,19 @@ def api_add(name, population, longitude, latitude):
 
    except Exception as e:
       response = {'Status': -1, 'Message': str(e) }
+   return response
+
+@app.route('/api/ddb/delete/<string:counter>')
+def api_ddb_delete(counter):
+   
+   try:
+      dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
+      table = dynamodb.Table('cities')
+      table.delete_item(Key={"Counter": counter})
+      response = {'Status': 0 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
+
    return response
 
 @app.route('/api/delete/<string:counter>')
