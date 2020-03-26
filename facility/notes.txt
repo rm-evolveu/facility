@@ -19,3 +19,5 @@ Check file names and paths
 - http://' + hostName + '/api/ddb/all
 
 - Do we need to check the uniqueness of uuid4()
+
+- Do we want to delete old api?

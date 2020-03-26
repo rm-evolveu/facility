@@ -66,8 +66,8 @@ def dict_factory(cursor, row):
 def run_query(query):
 
    # revert before deploying
-   # connection = sqlite3.connect("/home/ubuntu/flaskapp/cities.db")
-   connection = sqlite3.connect("cities.db")
+   connection = sqlite3.connect("/home/ubuntu/flaskapp/cities.db")
+   # connection = sqlite3.connect("cities.db")
 
    connection.row_factory = dict_factory
    cursor = connection.cursor()
@@ -161,6 +161,25 @@ def api_delete(counter):
    print('Response from delete: ', response)
    return response
 
+@app.route('/api/ddb/movein/<string:counter>/<int:how_many>')
+def api_ddb_movein(counter, how_many):
+   try:
+      dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
+      table = dynamodb.Table('cities')
+      city = table.get_item(Key={"Counter": counter})
+      current_population = city['Item']['Population']
+      new_population = current_population + how_many
+      table.update_item(
+         Key={"Counter": counter},
+         UpdateExpression="set Population = :p",
+         ExpressionAttributeValues={ ':p': new_population} 
+      )
+      response = {'Status': 0 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
+
+   return response
+
 @app.route('/api/movein/<string:counter>/<int:how_many>')
 def api_movein(counter, how_many):
    try:
@@ -180,7 +199,30 @@ def api_movein(counter, how_many):
       response = {'Status': -1, 'Message': str(e) }
 
    return response
-   
+
+@app.route('/api/ddb/moveout/<string:counter>/<int:how_many>')
+def api_ddb_moveout(counter, how_many):
+   try:
+      dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
+      table = dynamodb.Table('cities')
+      city = table.get_item(Key={"Counter": counter})
+      current_population = city['Item']['Population']
+      if (current_population <= how_many):
+            raise Exception('Trying to create a ghost city')
+
+      new_population = current_population - how_many
+      table.update_item(
+         Key={"Counter": counter},
+         UpdateExpression="set Population = :p",
+         ExpressionAttributeValues={ ':p': new_population} 
+      )
+      response = {'Status': 0 }
+   except Exception as e:
+      response = {'Status': -1, 'Message': str(e) }
+
+   return response
+
+
 @app.route('/api/moveout/<string:counter>/<int:how_many>')
 def api_moveout(counter, how_many):
    try:
