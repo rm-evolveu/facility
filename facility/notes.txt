@@ -23,3 +23,5 @@ Check file names and paths
 - Do we want to delete old api?
 
 - CSS figure out the buttons
+
+- Make Settings label big and collored (headers?)
