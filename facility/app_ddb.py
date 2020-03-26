@@ -100,7 +100,7 @@ def api_all():
       response = {'Status': -1, 'Message': str(e) }
    return response
 
-@app.route('/api/ddb/add/<string:name>/<string:population>/<string:longitude>/<string:latitude>')
+@app.route('/api/ddb/add/<string:name>/<int:population>/<string:longitude>/<string:latitude>')
 def api_ddb_add(name, population, longitude, latitude):
    try:
       dynamodb = boto3.resource('dynamodb', region_name='ca-central-1')
@@ -108,7 +108,7 @@ def api_ddb_add(name, population, longitude, latitude):
 
       with table.batch_writer() as batch:
          batch.put_item(Item={"Counter": str(uuid.uuid4()), "Name": name,
-            "Population": population, "Longitude": longitude, "Latitude": latitude })
+            "Population": population, "Longitude": decimal.Decimal(longitude), "Latitude": decimal.Decimal(latitude) })
 
       response = {'Status': 0 }
 
