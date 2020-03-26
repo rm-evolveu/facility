@@ -15,8 +15,8 @@ const messages_so_SO = {
 
 	CityInfoDisplay: {
 		render: {
-			mostNorthernCity: "Inta badan Waqooyiga Magaalada:",
-			mostSouthernCity: "Inta badan Koonfurta Magaalada:",
+			mostNorthernCity: "Waqooyiga Magaalada:",
+			mostSouthernCity: "Koonfurta Magaalada:",
 			totalPopulation: "Wadarta Dadka:"
 		}
 	},
@@ -35,7 +35,7 @@ const messages_so_SO = {
 	CityController: {
 		render: {
 			name: "Magac:",
-			population: "Tirada dadka magaalada:",
+			population: "Tiro magaalo:",
 			longitude: "Dhigaha:",
 			latitude: "Lool:",
 			randomize: "Isdiyaar",

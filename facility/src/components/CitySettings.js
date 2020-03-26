@@ -2,7 +2,7 @@ import React from 'react';
 
 class CityLanguageLabel extends React.Component {
     render () {
-        return <div className="wideColumn">
+        return <div>
                     <input id={this.props.language} type="radio" name="language" 
                         value={this.props.language} onClick={this.props.languageHandler}
                         defaultChecked={this.props.currentLanguage === this.props.language}
@@ -16,8 +16,8 @@ class CitySettings extends React.Component {
 
     render () {
 
-        return <div className="card controllerCard">
-                    <div className="widestColumn">Settings</div>
+        return <div className="card two-column controllerCard">
+                    <div className="wideColumnCentered">Settings</div>
 
                     { Object.keys(this.props.messages).map (value => {
                             return <CityLanguageLabel language={value} 

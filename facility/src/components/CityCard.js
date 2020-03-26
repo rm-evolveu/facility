@@ -11,41 +11,41 @@ class CityCard extends React.Component {
 
     render () {
 
-        return <div className="card cityCard">
-            <div className="wideColumn1">
+        return <div className="card two-column cityCard">
+            <div>
                 {this.props.messages.CityCard.render.cityID}
             </div>
-            <div className="wideColumn2">
+            <div>
                 {this.props.counter.substring(0,8)}
             </div>
-            <div className="wideColumn1">
+            <div>
                 {this.props.messages.CityCard.render.cityName}
             </div>
-            <div className="wideColumn2">
+            <div>
                 {this.props.cityName}
             </div>
-            <div className="wideColumn1">
+            <div>
                 {this.props.messages.CityCard.render.population}
             </div>
-            <div className="wideColumn2">
+            <div>
                 {this.props.cityPopulation}
             </div>
-            <div className="wideColumn1">
+            <div>
                 {this.props.messages.CityCard.render.location}
             </div>
-            <div className="wideColumn2">
+            <div>
                 {this.props.messages.pojoStrings[this.props.cityHemisphere]}
             </div>
-            <div className="wideColumn1">
+            <div>
                 {this.props.messages.CityCard.render.size}
             </div>
-            <div className="wideColumn2">
+            <div>
                 {this.props.messages.pojoStrings[this.props.cityHowBig]}
             </div>
-            <div className="normalColumn">
+            <div className="centered">
                 <input type="number" ref={this.myRef}/>
             </div>
-            <div className="normalColumn">
+            <div className="centered">
                 <button 
                     onClick={
                         () => { 
@@ -55,7 +55,7 @@ class CityCard extends React.Component {
                     {this.props.messages.CityCard.render.moveIn}
                 </button>
             </div>
-            <div className="normalColumn">
+            <div className="centered">
                 <button 
                     onClick={
                         () => { 
@@ -65,7 +65,7 @@ class CityCard extends React.Component {
                     {this.props.messages.CityCard.render.moveOut}
                 </button>
             </div>
-            <div className="normalColumn">
+            <div className="centered">
                 <div className="cityCardCell">
                     <button 
                         onClick={

@@ -28,33 +28,33 @@ class CityController extends React.Component {
 
     render () {
 
-        return <div className="card controllerCard">
-                    <div className="wideColumn1">
+        return <div className="card two-column controllerCard">
+                    <div>
                         {this.props.messages.CityController.render.name}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         <input type="text" ref={this.cityNameRef}/>
                     </div>
-                    <div className="wideColumn1">
+                    <div>
                         {this.props.messages.CityController.render.population}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         <input type="text" ref={this.cityPopulationRef}/>
                     </div>
-                    <div className="wideColumn1">
+                    <div>
                         {this.props.messages.CityController.render.longitude}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         <input type="text" ref={this.cityLongitudeRef}/>
                     </div>
-                    <div className="wideColumn1">
+                    <div>
                         {this.props.messages.CityController.render.latitude}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         <input type="text" ref={this.cityLatitudeRef}/>
                     </div>
 
-                    <div className="wideColumn1">
+                    <div>
                         <button 
                             onClick={
                                 () => {
@@ -65,7 +65,7 @@ class CityController extends React.Component {
                         </button>
                     </div>
 
-                    <div className="wideColumn2">
+                    <div>
                         <button 
                             onClick={
                                 () => { 

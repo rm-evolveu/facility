@@ -4,29 +4,29 @@ class CityInfoDisplay extends React.Component {
 
     render () {
 
-        return <div className="card controllerCard">
-                    <div className="wideColumn1">
+        return <div className="card two-column controllerCard">
+                    <div>
                         {this.props.messages.CityInfoDisplay.render.mostNorthernCity}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         {this.props.mostNorthern}
                     </div>
-                    <div className="wideColumn1">
+                    <div>
                         {this.props.messages.CityInfoDisplay.render.mostSouthernCity}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         {this.props.mostSouthern}
                     </div>
-                    <div className="wideColumn1">
+                    <div>
                         {this.props.messages.CityInfoDisplay.render.totalPopulation}
                     </div>
-                    <div className="wideColumn2">
+                    <div>
                         {this.props.totalPopulation}
                     </div>
-                    <div className="widestColumn">
+                    {/* <div>
                         <button onClick={this.props.fetchHandler}>Fetch</button> 
-                    </div>                    
-                    <div className="widestColumn infoMessage">
+                    </div>                     */}
+                    <div className="wideColumnCentered infoMessage">
                         {this.props.message}
                     </div>
                 </div>
