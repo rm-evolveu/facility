@@ -96,7 +96,8 @@ class CityComponent extends React.Component {
     }
 
     fetchDelete = async (counter) => {
-        const url = 'http://' + hostName + '/api/ddb/delete/' + counter
+        // const url = 'http://' + hostName + '/api/ddb/delete/' + counter
+        const url = 'https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/api/ddb/delete/' + counter
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
@@ -109,13 +110,15 @@ class CityComponent extends React.Component {
     }
 
     fetchMoveOut = async (counter, how_many) => {
-        const url = 'http://' + hostName + '/api/ddb/moveout/' + counter + '/' + how_many
+        // const url = 'http://' + hostName + '/api/ddb/moveout/' + counter + '/' + how_many
+        const url = 'https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/api/ddb/moveout/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
 
     fetchMoveIn = async (counter, how_many) => {
-        const url = 'http://' + hostName + '/api/ddb/movein/' + counter + '/' + how_many
+        // const url = 'http://' + hostName + '/api/ddb/movein/' + counter + '/' + how_many
+        const url = 'https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/api/ddb/movein/' + counter + '/' + how_many
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
@@ -134,7 +137,7 @@ class CityComponent extends React.Component {
     //  this is just a testing area
 
     randomCity = async () => {
-        const url = 'http://' + hostName + '/services/randomcity'
+        const url = 'https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/services/randomcity'
         const responseData = await this.fetchHandler(url);
         return responseData['Name'];
     }    

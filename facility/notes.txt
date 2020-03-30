@@ -25,3 +25,7 @@ Check file names and paths
 - CSS figure out the buttons
 
 - Make Settings label big and collored (headers?)
+
+*** Next session
+- Rename lambdas (file names and function names)
+- Set up github actions for publish pipeline
