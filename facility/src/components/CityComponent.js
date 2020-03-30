@@ -77,7 +77,8 @@ class CityComponent extends React.Component {
     }
 
     fetchAll = async () => {
-        const url = 'http://' + hostName + '/api/ddb/all'
+        // const url = 'http://' + hostName + '/api/ddb/all'
+        const url = 'https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/api/ddb/all'
         const responseData = await this.fetchHandler(url);
         this.state.cities.flush()
         if (responseData.Status === 0) {
@@ -101,7 +102,8 @@ class CityComponent extends React.Component {
     }
 
     fetchAddCity = async (name, population, longitude, latitude) => {
-        const url = 'http://' + hostName + '/api/ddb/add/' + name + '/' + population + '/' + longitude + '/' + latitude
+        // const url = 'http://' + hostName + '/api/ddb/add/' + name + '/' + population + '/' + longitude + '/' + latitude
+        const url = "https://1jd2x5acej.execute-api.ca-central-1.amazonaws.com/api/ddb/add/" + name + '/' + population + '/' + longitude + '/' + latitude
         const responseData = await this.fetchHandler(url);
         return responseData.Status
     }
